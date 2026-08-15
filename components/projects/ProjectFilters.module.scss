@@ -1,22 +1,31 @@
 .filters {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+
   gap: 6px;
 
   margin-bottom: 28px;
-
-  padding-bottom: 20px;
+  padding-bottom: 18px;
 
   border-bottom: 1px solid var(--border);
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .filters button {
-  min-height: 38px;
+  flex-shrink: 0;
+
+  min-height: 36px;
 
   padding: 0 14px;
 
   border: 1px solid var(--border);
-
   border-radius: 999px;
 
   background: transparent;
@@ -25,22 +34,32 @@
 
   font-family: inherit;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
+
+  letter-spacing: -0.01em;
+
+  white-space: nowrap;
 
   cursor: pointer;
 
   transition:
     color var(--transition-fast),
-    background var(--transition-fast),
-    border-color var(--transition-fast);
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
 
-  &:hover {
-    color: var(--foreground);
+.filters button:hover {
+  color: var(--foreground);
 
-    border-color:
-      var(--border-strong);
-  }
+  border-color: var(--border-strong);
+
+  transform: translateY(-1px);
+}
+
+.filters button:active {
+  transform: scale(0.97);
 }
 
 .filters button.active {
@@ -49,4 +68,28 @@
   background: var(--foreground);
 
   border-color: var(--foreground);
+}
+
+@media (max-width: 600px) {
+  .filters {
+    margin-bottom: 22px;
+
+    padding-bottom: 15px;
+
+    gap: 5px;
+  }
+
+  .filters button {
+    min-height: 34px;
+
+    padding-inline: 12px;
+
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filters button {
+    transition: none;
+  }
 }

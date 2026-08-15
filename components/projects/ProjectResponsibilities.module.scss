@@ -1,5 +1,5 @@
 .section {
-  padding-block: 100px;
+  padding-block: 90px;
 
   border-bottom: 1px solid var(--border);
 }
@@ -7,20 +7,29 @@
 .grid {
   display: grid;
 
-  grid-template-columns:
-    240px minmax(0, 1fr);
+  grid-template-columns: 200px minmax(0, 1fr);
 
-  gap: 70px;
+  gap: 80px;
+
+  align-items: start;
 }
 
+/* ================================
+   Section Label
+================================ */
+
 .label {
+  position: sticky;
+  top: 110px;
+
   display: flex;
   flex-direction: column;
-  gap: 12px;
+
+  gap: 10px;
 
   color: var(--foreground-subtle);
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 
   letter-spacing: 0.08em;
@@ -29,15 +38,23 @@
 }
 
 .label span {
-  font-size: 10px;
+  font-size: 9px;
+
+  letter-spacing: 0.12em;
 }
+
+/* ================================
+   Role
+================================ */
 
 .role {
   display: flex;
-  align-items: center;
-  gap: 14px;
 
-  padding-bottom: 20px;
+  align-items: baseline;
+
+  gap: 16px;
+
+  padding-bottom: 22px;
 
   border-bottom: 1px solid var(--border);
 }
@@ -45,46 +62,131 @@
 .role span {
   color: var(--foreground-subtle);
 
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
 }
 
 .role strong {
-  font-size: 15px;
+  font-size: 17px;
+
+  font-weight: 500;
+
+  letter-spacing: -0.02em;
 }
 
+/* ================================
+   Responsibility List
+================================ */
+
 .list {
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 .item {
+  position: relative;
+
   display: grid;
 
-  grid-template-columns: 40px 1fr;
+  grid-template-columns: 38px minmax(0, 1fr);
 
   gap: 20px;
 
-  padding-block: 22px;
+  padding-block: 23px;
 
   border-bottom: 1px solid var(--border);
+
+  transition:
+    padding-left 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background var(--transition-fast);
 }
 
 .item>span {
+  padding-top: 3px;
+
   color: var(--foreground-subtle);
 
-  font-size: 10px;
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  transition:
+    color var(--transition-fast);
 }
 
 .item p {
-  max-width: 650px;
+  max-width: 680px;
 
   margin: 0;
 
   color: var(--foreground-muted);
 
-  font-size: 15px;
+  font-size: 14px;
 
-  line-height: 1.65;
+  line-height: 1.7;
+
+  transition:
+    color var(--transition-fast);
 }
+
+/* Small accent indicator */
+
+.item::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 1px;
+  height: 100%;
+
+  background: var(--foreground);
+
+  transform: scaleY(0);
+
+  transform-origin: center;
+
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.item:hover {
+  padding-left: 10px;
+}
+
+.item:hover::before {
+  transform: scaleY(1);
+}
+
+.item:hover>span {
+  color: var(--foreground);
+}
+
+.item:hover p {
+  color: var(--foreground);
+}
+
+/* ================================
+   Tablet
+================================ */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 170px minmax(0, 1fr);
+
+    gap: 50px;
+  }
+}
+
+/* ================================
+   Mobile
+================================ */
 
 @media (max-width: 768px) {
   .section {
@@ -94,6 +196,40 @@
   .grid {
     grid-template-columns: 1fr;
 
-    gap: 40px;
+    gap: 35px;
+  }
+
+  .label {
+    position: static;
+  }
+
+  .role {
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    padding-bottom: 18px;
+  }
+
+  .role strong {
+    font-size: 15px;
+  }
+
+  .item {
+    grid-template-columns: 30px minmax(0, 1fr);
+
+    gap: 14px;
+
+    padding-block: 19px;
+  }
+
+  .item p {
+    font-size: 13px;
+
+    line-height: 1.65;
+  }
+
+  .item:hover {
+    padding-left: 6px;
   }
 }

@@ -4,33 +4,89 @@
   padding-block: 100px;
 }
 
+/* ================================
+   Skeleton
+================================ */
+
 .skeleton {
-  animation: pulse 1.5s ease-in-out infinite;
+  position: relative;
+
+  overflow: hidden;
 }
+
+/* ================================
+   Base
+================================ */
 
 .small,
 .title,
 .titleShort,
 .meta,
 .hero,
-.text {
-  background: var(--surface-muted);
+.text,
+.textShort {
+  position: relative;
+
+  overflow: hidden;
 
   border: 1px solid var(--border);
+
+  background: var(--surface-muted);
 }
+
+/* ================================
+   Shimmer
+================================ */
+
+.small::after,
+.title::after,
+.titleShort::after,
+.meta::after,
+.hero::after,
+.text::after,
+.textShort::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(90deg,
+      transparent 0%,
+      color-mix(in srgb,
+        var(--foreground) 4%,
+        transparent) 50%,
+      transparent 100%);
+
+  transform: translateX(-100%);
+
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* ================================
+   Small Label
+================================ */
 
 .small {
   width: 90px;
   height: 12px;
 
   margin-bottom: 30px;
+
+  border-radius: 3px;
 }
+
+/* ================================
+   Title
+================================ */
 
 .title {
   width: 75%;
   height: 80px;
 
   margin-bottom: 15px;
+
+  border-radius: 6px;
 }
 
 .titleShort {
@@ -38,51 +94,101 @@
   height: 80px;
 
   margin-bottom: 35px;
+
+  border-radius: 6px;
 }
+
+/* ================================
+   Meta
+================================ */
 
 .meta {
   width: 220px;
   height: 14px;
 
   margin-bottom: 70px;
+
+  border-radius: 3px;
 }
+
+/* ================================
+   Hero
+================================ */
 
 .hero {
   width: 100%;
-  height: min(55vw,
-      600px);
+
+  height: min(55vw, 600px);
 
   margin-bottom: 60px;
+
+  border-radius: var(--radius-lg);
 }
+
+/* ================================
+   Content
+================================ */
 
 .columns {
   display: grid;
 
   grid-template-columns:
-    1fr 1fr;
+    repeat(2, minmax(0, 1fr));
 
   gap: 30px;
 }
 
+.textGroup {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
 .text {
-  height: 180px;
+  width: 100%;
+
+  height: 24px;
+
+  border-radius: 4px;
 }
 
-@keyframes pulse {
+.textShort {
+  width: 70%;
 
-  0%,
+  height: 24px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 4px;
+
+  background: var(--surface-muted);
+}
+
+/* ================================
+   Animation
+================================ */
+
+@keyframes shimmer {
   100% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 1;
+    transform: translateX(100%);
   }
 }
+
+/* ================================
+   Mobile
+================================ */
 
 @media (max-width: 700px) {
   .page {
+    min-height: 75vh;
+
     padding-block: 70px;
+  }
+
+  .small {
+    margin-bottom: 24px;
   }
 
   .title,
@@ -90,11 +196,48 @@
     height: 55px;
   }
 
+  .title {
+    width: 90%;
+  }
+
+  .titleShort {
+    width: 65%;
+
+    margin-bottom: 28px;
+  }
+
+  .meta {
+    width: 180px;
+
+    margin-bottom: 45px;
+  }
+
   .hero {
     height: 60vw;
+
+    margin-bottom: 45px;
   }
 
   .columns {
     grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+}
+
+/* ================================
+   Reduced Motion
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .small::after,
+  .title::after,
+  .titleShort::after,
+  .meta::after,
+  .hero::after,
+  .text::after,
+  .textShort::after {
+    animation: none;
   }
 }

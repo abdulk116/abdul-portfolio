@@ -20,76 +20,84 @@ export default function ProjectHero({
   return (
     <section className={styles.hero}>
       <div className="container">
-        <Link
-          href="/projects"
-          className={styles.back}
-        >
-          <ArrowLeft
-            size={15}
-            strokeWidth={1.7}
-          />
+        <div className={styles.topbar}>
+          <Link
+            href="/projects"
+            className={styles.back}
+          >
+            <ArrowLeft
+              size={14}
+              strokeWidth={1.7}
+            />
 
-          Back to projects
-        </Link>
+            <span>Back to projects</span>
+          </Link>
+
+          <span className={styles.caseStudy}>
+            Case Study
+          </span>
+        </div>
 
         <div className={styles.content}>
           <div className={styles.meta}>
-            <span>
-              {project.category}
+            <span>{project.category}</span>
+
+            <span className={styles.metaDivider}>
+              /
             </span>
 
-            <span>•</span>
-
-            <span>
-              {project.role}
-            </span>
+            <span>{project.role}</span>
 
             {project.year && (
               <>
-                <span>•</span>
-
-                <span>
-                  {project.year}
+                <span className={styles.metaDivider}>
+                  /
                 </span>
+
+                <span>{project.year}</span>
               </>
             )}
           </div>
 
-          <h1>
-            {project.title}
-          </h1>
+          <h1>{project.title}</h1>
 
           <p className={styles.description}>
             {project.description}
           </p>
 
-          <div className={styles.technologies}>
-            {project.technologies.map(
-              (technology) => (
-                <Badge
-                  key={technology}
+          <div className={styles.footer}>
+            <div className={styles.technologies}>
+              {project.technologies.map(
+                (technology) => (
+                  <Badge key={technology}>
+                    {technology}
+                  </Badge>
+                )
+              )}
+            </div>
+
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.liveLink}
+              >
+                <span>
+                  Visit project
+                </span>
+
+                <span
+                  className={styles.liveIcon}
                 >
-                  {technology}
-                </Badge>
-              )
+                  <ArrowUpRight
+                    size={15}
+                    strokeWidth={1.7}
+                  />
+                </span>
+              </a>
             )}
           </div>
-
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.liveLink}
-            >
-              Visit project
-
-              <ArrowUpRight
-                size={16}
-                strokeWidth={1.8}
-              />
-            </a>
-          )}
         </div>
       </div>
     </section>

@@ -5,7 +5,25 @@
     repeat(2, minmax(0, 1fr));
 
   gap: 16px;
+
+  animation: gridIn 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+@keyframes gridIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------
+   Empty State
+-------------------------------------------------- */
 
 .empty {
   min-height: 260px;
@@ -16,19 +34,59 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 
+  background: var(--surface);
+
   color: var(--foreground-muted);
 
   font-size: 14px;
 
   text-align: center;
+
+  animation: gridIn 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .empty p {
+  max-width: 300px;
+
   margin: 0;
+
+  line-height: 1.6;
 }
+
+/* --------------------------------------------------
+   Tablet
+-------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .grid {
+    gap: 12px;
+  }
+}
+
+/* --------------------------------------------------
+   Mobile
+-------------------------------------------------- */
 
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .empty {
+    min-height: 220px;
+  }
+}
+
+/* --------------------------------------------------
+   Reduced Motion
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .grid,
+  .empty {
+    animation: none;
   }
 }

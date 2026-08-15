@@ -1,13 +1,15 @@
 .hero {
-  padding-block: 110px 90px;
+  padding-block: 115px 95px;
 
   border-bottom: 1px solid var(--border);
 }
 
 .eyebrow {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 
   color: var(--foreground-subtle);
 
@@ -19,34 +21,139 @@
   text-transform: uppercase;
 }
 
+.eyebrow::before {
+  content: "";
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--foreground);
+
+  opacity: 0.7;
+}
+
 .hero h1 {
   max-width: 1050px;
 
   margin: 0;
 
-  font-size: clamp(52px,
-      9vw,
-      112px);
+  font-size: clamp(48px,
+      8vw,
+      108px);
 
-  line-height: 0.93;
+  line-height: 0.92;
 
   letter-spacing: -0.075em;
+
+  text-wrap: balance;
 }
 
 .hero p {
   max-width: 650px;
 
-  margin: 40px 0 0;
+  margin: 42px 0 0;
 
   color: var(--foreground-muted);
 
-  font-size: 17px;
+  font-size: 16px;
 
   line-height: 1.75;
 }
 
-@media (max-width: 768px) {
+/* --------------------------------------------------
+   Tablet
+-------------------------------------------------- */
+
+@media (max-width: 900px) {
   .hero {
-    padding-block: 75px 65px;
+    padding-block: 95px 80px;
+  }
+
+  .hero h1 {
+    max-width: 850px;
+
+    font-size: clamp(46px,
+        9vw,
+        82px);
+  }
+
+  .hero p {
+    max-width: 600px;
+
+    margin-top: 32px;
+
+    font-size: 15px;
+  }
+}
+
+/* --------------------------------------------------
+   Mobile
+-------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .hero {
+    padding-block: 70px 58px;
+  }
+
+  .eyebrow {
+    margin-bottom: 22px;
+
+    font-size: 9px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+
+    font-size: clamp(42px,
+        13vw,
+        62px);
+
+    line-height: 0.94;
+
+    letter-spacing: -0.065em;
+  }
+
+  .hero p {
+    max-width: 100%;
+
+    margin-top: 28px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+}
+
+/* --------------------------------------------------
+   Small Mobile
+-------------------------------------------------- */
+
+@media (max-width: 380px) {
+  .hero {
+    padding-block: 60px 50px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+
+    line-height: 0.96;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+}
+
+/* --------------------------------------------------
+   Reduced Motion
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero h1,
+  .hero p {
+    transition: none;
   }
 }

@@ -7,7 +7,7 @@ import {
 
 import {
   useTheme,
-} from "./ThemeProvider";
+} from "@/components/theme/ThemeProvider";
 
 import styles from "./ThemeToggle.module.scss";
 
@@ -15,7 +15,20 @@ export default function ThemeToggle() {
   const {
     theme,
     toggleTheme,
+    mounted,
   } = useTheme();
+
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className={styles.button}
+        aria-label="Toggle theme"
+        title="Toggle theme"
+        disabled
+      />
+    );
+  }
 
   const isDark = theme === "dark";
 
@@ -36,9 +49,17 @@ export default function ThemeToggle() {
       }
     >
       {isDark ? (
-        <Sun size={17} strokeWidth={1.7} />
+        <Sun
+          size={17}
+          strokeWidth={1.7}
+          aria-hidden="true"
+        />
       ) : (
-        <Moon size={17} strokeWidth={1.7} />
+        <Moon
+          size={17}
+          strokeWidth={1.7}
+          aria-hidden="true"
+        />
       )}
     </button>
   );

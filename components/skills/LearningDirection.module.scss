@@ -1,112 +1,325 @@
 .section {
-  padding-block: 100px;
+  padding-block: 105px 120px;
 }
+
+/* --------------------------------------------------
+   Card
+-------------------------------------------------- */
 
 .card {
   position: relative;
 
   display: grid;
 
-  grid-template-columns: 70px 1fr 40px;
+  grid-template-columns: 64px minmax(0, 1fr) 40px;
 
   gap: 30px;
 
-  padding: 50px;
+  padding: 48px;
+
+  overflow: hidden;
 
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+
+  background:
+    radial-gradient(circle at 100% 0%,
+      var(--accent-soft),
+      transparent 32%);
+
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base);
 }
+
+.card:hover {
+  border-color: var(--border-strong);
+}
+
+/* --------------------------------------------------
+   Icon
+-------------------------------------------------- */
 
 .icon {
   width: 42px;
   height: 42px;
 
   display: grid;
+
   place-items: center;
 
   border: 1px solid var(--border);
 
   border-radius: 50%;
 
+  background: var(--surface);
+
   color: var(--foreground-muted);
+
+  transition:
+    transform 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
+
+.card:hover .icon {
+  transform: rotate(8deg);
+
+  color: var(--foreground);
+
+  border-color: var(--border-strong);
+}
+
+/* --------------------------------------------------
+   Content
+-------------------------------------------------- */
 
 .eyebrow {
   display: block;
 
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 
   color: var(--foreground-subtle);
 
   font-size: 9px;
+
   font-weight: 700;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 }
 
 .card h2 {
+  max-width: 700px;
+
   margin: 0;
 
-  font-size: clamp(34px,
+  font-size: clamp(36px,
       5vw,
-      58px);
+      60px);
 
-  line-height: 0.98;
+  line-height: 0.96;
 
-  letter-spacing: -0.06em;
+  letter-spacing: -0.065em;
 }
 
 .card p {
   max-width: 600px;
 
-  margin: 22px 0 0;
+  margin: 23px 0 0;
 
   color: var(--foreground-muted);
 
   font-size: 14px;
 
-  line-height: 1.7;
+  line-height: 1.75;
 }
+
+/* --------------------------------------------------
+   Learning Areas
+-------------------------------------------------- */
 
 .areas {
   display: flex;
+
   flex-wrap: wrap;
 
   gap: 7px;
 
-  margin-top: 25px;
+  margin-top: 28px;
 }
 
 .areas span {
-  padding: 7px 11px;
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 30px;
+
+  padding: 6px 11px;
 
   border: 1px solid var(--border);
 
   border-radius: 999px;
 
+  background: var(--surface);
+
   color: var(--foreground-muted);
 
   font-size: 10px;
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
-.arrow {
-  color: var(--foreground-subtle);
+.areas span:hover {
+  color: var(--foreground);
+
+  border-color: var(--border-strong);
+
+  background: var(--surface-muted);
 }
+
+/* --------------------------------------------------
+   Arrow
+-------------------------------------------------- */
+
+.arrow {
+  align-self: start;
+
+  margin-top: 5px;
+
+  color: var(--foreground-subtle);
+
+  transition:
+    transform 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1),
+    color var(--transition-fast);
+}
+
+.card:hover .arrow {
+  color: var(--foreground);
+
+  transform: translate(4px,
+      -4px);
+}
+
+/* --------------------------------------------------
+   Tablet
+-------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .section {
+    padding-block: 85px 100px;
+  }
+
+  .card {
+    grid-template-columns:
+      55px minmax(0, 1fr) 30px;
+
+    gap: 25px;
+
+    padding: 38px;
+  }
+
+  .card h2 {
+    font-size: clamp(34px,
+        6vw,
+        52px);
+  }
+}
+
+/* --------------------------------------------------
+   Mobile
+-------------------------------------------------- */
 
 @media (max-width: 700px) {
   .section {
-    padding-block: 70px;
+    padding-block: 70px 80px;
   }
 
   .card {
     grid-template-columns: 1fr;
 
+    gap: 25px;
+
     padding: 28px;
+
+    border-radius: var(--radius-md);
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+
+    font-size: 8px;
+  }
+
+  .card h2 {
+    max-width: 100%;
+
+    font-size: clamp(34px,
+        10vw,
+        48px);
+
+    line-height: 0.96;
+  }
+
+  .card p {
+    margin-top: 20px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+  .areas {
+    gap: 6px;
+
+    margin-top: 24px;
+  }
+
+  .areas span {
+    min-height: 29px;
+
+    padding-inline: 10px;
+
+    font-size: 9px;
   }
 
   .arrow {
     display: none;
+  }
+}
+
+/* --------------------------------------------------
+   Small Mobile
+-------------------------------------------------- */
+
+@media (max-width: 380px) {
+  .section {
+    padding-block: 60px 70px;
+  }
+
+  .card {
+    padding: 23px;
+  }
+
+  .card h2 {
+    font-size: 33px;
+  }
+
+  .card p {
+    font-size: 12px;
+  }
+}
+
+/* --------------------------------------------------
+   Reduced Motion
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card,
+  .icon,
+  .arrow,
+  .areas span {
+    transition: none;
   }
 }

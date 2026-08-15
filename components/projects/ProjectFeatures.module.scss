@@ -1,83 +1,408 @@
 .section {
-  padding-block: 100px;
+  padding-block: 105px;
 
   border-bottom: 1px solid var(--border);
 }
+
+
+/* =========================================
+   Layout
+========================================= */
 
 .grid {
   display: grid;
 
   grid-template-columns:
-    240px minmax(0, 1fr);
+    220px minmax(0, 1fr);
 
-  gap: 70px;
+  gap: 90px;
+
+  justify-content: space-between;
 }
 
+
+/* =========================================
+   Section Label
+========================================= */
+
 .label {
+  position: sticky;
+
+  top: 120px;
+
+  align-self: start;
+
   display: flex;
+
   flex-direction: column;
-  gap: 12px;
+
+  gap: 11px;
 
   color: var(--foreground-subtle);
 
-  font-size: 12px;
+  font-size: 10px;
+
   font-weight: 700;
 
-  letter-spacing: 0.08em;
+  letter-spacing: 0.11em;
 
   text-transform: uppercase;
 }
 
-.label span {
-  font-size: 10px;
+.sectionNumber {
+  color: var(--foreground);
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
 }
+
+
+/* =========================================
+   Feature Grid
+========================================= */
 
 .features {
   display: grid;
 
   grid-template-columns:
-    repeat(2, 1fr);
+    repeat(2, minmax(0, 1fr));
 
   gap: 1px;
+
+  overflow: hidden;
 
   border: 1px solid var(--border);
 
   background: var(--border);
 }
 
-.feature {
-  min-height: 120px;
 
-  padding: 22px;
+/* =========================================
+   Feature
+========================================= */
+
+.feature {
+  position: relative;
+
+  min-height: 215px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 25px;
+
+  overflow: hidden;
 
   background: var(--surface);
+
+  animation:
+    featureIn 650ms calc(var(--feature-index) * 70ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  transition:
+    background-color var(--transition-base);
 }
 
-.feature span {
+
+/* subtle hover layer */
+
+.feature::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 100% 0%,
+      var(--accent-soft),
+      transparent 45%);
+
+  opacity: 0;
+
+  transform: scale(0.8);
+
+  transition:
+    opacity 500ms ease,
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.feature:hover {
+  background: var(--surface-muted);
+}
+
+.feature:hover::before {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+
+/* =========================================
+   Top
+========================================= */
+
+.top {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.number {
   color: var(--foreground-subtle);
 
-  font-size: 10px;
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
 }
+
+
+/* =========================================
+   Arrow
+========================================= */
+
+.icon {
+  width: 34px;
+
+  height: 34px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+
+  color: var(--foreground-subtle);
+
+  transition:
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.feature:hover .icon {
+  transform:
+    translate(3px, -3px) rotate(3deg);
+
+  background: var(--foreground);
+
+  border-color: var(--foreground);
+
+  color: var(--background);
+}
+
+
+/* =========================================
+   Feature Text
+========================================= */
 
 .feature p {
-  margin: 28px 0 0;
+  position: relative;
 
-  font-size: 14px;
-  line-height: 1.5;
+  z-index: 1;
+
+  max-width: 480px;
+
+  margin: 40px 0 0;
+
+  font-size: clamp(16px,
+      2vw,
+      21px);
+
+  font-weight: 500;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.025em;
 }
+
+
+/* =========================================
+   Bottom Line
+========================================= */
+
+.line {
+  position: relative;
+
+  z-index: 1;
+
+  width: 28px;
+
+  height: 1px;
+
+  margin-top: 28px;
+
+  background: var(--foreground-subtle);
+
+  transition:
+    width 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color var(--transition-fast);
+}
+
+.feature:hover .line {
+  width: 55px;
+
+  background: var(--foreground);
+}
+
+
+/* =========================================
+   Animation
+========================================= */
+
+@keyframes featureIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =========================================
+   Tablet
+========================================= */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns:
+      170px minmax(0, 1fr);
+
+    gap: 50px;
+  }
+
+  .label {
+    top: 100px;
+  }
+
+  .feature {
+    min-height: 190px;
+  }
+}
+
+
+/* =========================================
+   Mobile
+========================================= */
 
 @media (max-width: 768px) {
   .section {
-    padding-block: 70px;
+    padding-block: 75px;
   }
 
   .grid {
     grid-template-columns: 1fr;
 
-    gap: 40px;
+    gap: 38px;
+  }
+
+  .label {
+    position: static;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .label::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    margin-left: 8px;
+
+    background: var(--border);
   }
 
   .features {
     grid-template-columns: 1fr;
+  }
+
+  .feature {
+    min-height: 165px;
+
+    padding: 21px;
+  }
+
+  .feature p {
+    margin-top: 32px;
+
+    font-size: 16px;
+
+    line-height: 1.4;
+  }
+}
+
+
+/* =========================================
+   Small Mobile
+========================================= */
+
+@media (max-width: 480px) {
+  .section {
+    padding-block: 60px;
+  }
+
+  .feature {
+    min-height: 150px;
+
+    padding: 18px;
+  }
+
+  .feature p {
+    max-width: 90%;
+
+    font-size: 15px;
+  }
+
+  .icon {
+    width: 30px;
+
+    height: 30px;
+  }
+}
+
+
+/* =========================================
+   Reduced Motion
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .feature {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+  .feature::before,
+  .icon,
+  .line {
+    transition: none !important;
   }
 }

@@ -77,13 +77,42 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
+const themeScript = `
+  (function () {
+    try {
+      var storedTheme = localStorage.getItem("theme");
+
+      if (storedTheme === "dark" || storedTheme === "light") {
+        document.documentElement.dataset.theme = storedTheme;
+        return;
+      }
+
+      var prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      document.documentElement.dataset.theme =
+        prefersDark ? "dark" : "light";
+    } catch (error) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeScript,
+          }}
+        />
+      </head>
       <body id="top">
         <ThemeProvider>
           <PersonJsonLd />

@@ -6,6 +6,21 @@ interface ProjectOverviewProps {
   project: Project;
 }
 
+const sections = [
+  {
+    label: "The challenge",
+    key: "challenge",
+  },
+  {
+    label: "The approach",
+    key: "solution",
+  },
+  {
+    label: "Outcome",
+    key: "outcome",
+  },
+] as const;
+
 export default function ProjectOverview({
   project,
 }: ProjectOverviewProps) {
@@ -13,41 +28,49 @@ export default function ProjectOverview({
     <section className={styles.section}>
       <div className="container">
         <div className={styles.grid}>
+          {/* Section Label */}
           <div className={styles.label}>
-            <span>01</span>
-            Overview
+            <span className={styles.number}>
+              01
+            </span>
+
+            <span>
+              Overview
+            </span>
           </div>
 
+          {/* Content */}
           <div className={styles.content}>
-            <div className={styles.block}>
-              <p className={styles.eyebrow}>
-                The challenge
-              </p>
+            {sections.map(
+              (section, index) => (
+                <article
+                  key={section.key}
+                  className={styles.block}
+                  style={
+                    {
+                      "--block-index": index,
+                    } as React.CSSProperties
+                  }
+                >
+                  <div className={styles.blockHeader}>
+                    <span className={styles.blockNumber}>
+                      {String(index + 1).padStart(
+                        2,
+                        "0"
+                      )}
+                    </span>
 
-              <p>
-                {project.challenge}
-              </p>
-            </div>
+                    <span className={styles.eyebrow}>
+                      {section.label}
+                    </span>
+                  </div>
 
-            <div className={styles.block}>
-              <p className={styles.eyebrow}>
-                The approach
-              </p>
-
-              <p>
-                {project.solution}
-              </p>
-            </div>
-
-            <div className={styles.block}>
-              <p className={styles.eyebrow}>
-                Outcome
-              </p>
-
-              <p>
-                {project.outcome}
-              </p>
-            </div>
+                  <p>
+                    {project[section.key]}
+                  </p>
+                </article>
+              )
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 import styles from "./not-found.module.scss";
 
@@ -7,9 +8,15 @@ export default function ProjectNotFound() {
     <main className={styles.page}>
       <div className="container">
         <div className={styles.content}>
-          <span>
-            Project not found
-          </span>
+          <div className={styles.meta}>
+            <span className={styles.code}>
+              404
+            </span>
+
+            <span className={styles.label}>
+              Project not found
+            </span>
+          </div>
 
           <h1>
             This project
@@ -18,18 +25,34 @@ export default function ProjectNotFound() {
           </h1>
 
           <p>
-            The project you&apos;re looking for
-            may have been removed or the
-            URL may be incorrect.
+            The project you&apos;re looking for may
+            have been removed, renamed, or the URL
+            may be incorrect.
           </p>
 
           <div className={styles.actions}>
-            <Link href="/projects">
-              View all projects
+            <Link
+              href="/projects"
+              className={styles.primary}
+            >
+              <span>View all projects</span>
+
+              <ArrowUpRight
+                size={16}
+                strokeWidth={1.8}
+              />
             </Link>
 
-            <Link href="/">
-              Back home
+            <Link
+              href="/"
+              className={styles.secondary}
+            >
+              <ArrowLeft
+                size={15}
+                strokeWidth={1.8}
+              />
+
+              <span>Back home</span>
             </Link>
           </div>
         </div>

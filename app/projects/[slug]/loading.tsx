@@ -16,9 +16,17 @@ export default function ProjectLoading() {
           <div className={styles.hero} />
 
           <div className={styles.columns}>
-            <div className={styles.text} />
+            <div className={styles.textGroup}>
+              <div className={styles.text} />
+              <div className={styles.text} />
+              <div className={styles.textShort} />
+            </div>
 
-            <div className={styles.text} />
+            <div className={styles.textGroup}>
+              <div className={styles.text} />
+              <div className={styles.text} />
+              <div className={styles.textShort} />
+            </div>
           </div>
         </div>
       </div>
