@@ -1,5 +1,5 @@
 .section {
-  padding-block: 110px;
+  padding-block: 115px;
 
   background: var(--surface-muted);
 }
@@ -38,6 +38,8 @@
   line-height: 0.98;
 
   letter-spacing: -0.06em;
+
+  text-wrap: balance;
 }
 
 .layout>div>p {
@@ -49,15 +51,19 @@
 
   font-size: 14px;
 
-  line-height: 1.7;
+  line-height: 1.75;
 }
+
+/* ------------------------------
+   Form
+------------------------------ */
 
 .form {
   display: flex;
 
   flex-direction: column;
 
-  gap: 28px;
+  gap: 30px;
 }
 
 .form label {
@@ -65,7 +71,7 @@
 
   flex-direction: column;
 
-  gap: 10px;
+  gap: 9px;
 
   color: var(--foreground-subtle);
 
@@ -81,7 +87,7 @@
 .form textarea {
   width: 100%;
 
-  padding: 15px 0;
+  padding: 14px 0 13px;
 
   border: 0;
 
@@ -97,6 +103,8 @@
 
   font-size: 14px;
 
+  line-height: 1.6;
+
   letter-spacing: normal;
 
   text-transform: none;
@@ -104,25 +112,55 @@
   resize: vertical;
 
   transition:
-    border-color var(--transition-fast);
+    border-color 250ms ease,
+    padding-left 250ms ease;
+}
+
+.form textarea {
+  min-height: 150px;
 }
 
 .form input::placeholder,
 .form textarea::placeholder {
   color: var(--foreground-subtle);
+
+  transition:
+    opacity var(--transition-fast);
 }
 
 .form input:focus,
 .form textarea:focus {
   border-color: var(--foreground);
+
+  padding-left: 7px;
 }
 
+.form input:focus::placeholder,
+.form textarea:focus::placeholder {
+  opacity: 0.35;
+}
+
+/* ------------------------------
+   Button
+------------------------------ */
+
 .form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  position: relative;
+
   width: fit-content;
 
-  margin-top: 10px;
+  min-width: 130px;
+
+  margin-top: 8px;
 
   padding: 14px 22px;
+
+  overflow: hidden;
 
   border: 1px solid var(--foreground);
 
@@ -140,24 +178,54 @@
   cursor: pointer;
 
   transition:
+    transform var(--transition-fast),
     opacity var(--transition-fast);
 }
 
+.spinner {
+  animation: spin 900ms linear infinite;
+}
+
 .form button:hover {
-  opacity: 0.75;
+  transform: translateY(-2px);
+
+  opacity: 0.85;
+}
+
+.form button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .form button:disabled {
   cursor: wait;
 
   opacity: 0.5;
+
+  transform: none;
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ------------------------------
+   Feedback
+------------------------------ */
 
 .success,
 .error {
   margin: 0;
 
+  padding-top: 2px;
+
   font-size: 12px;
+
+  line-height: 1.6;
+
+  animation: messageIn 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .success {
@@ -167,6 +235,24 @@
 .error {
   color: var(--foreground-muted);
 }
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------
+   Honeypot
+------------------------------ */
 
 .honeypot {
   position: absolute !important;
@@ -181,10 +267,50 @@
   pointer-events: none !important;
 }
 
+/* ------------------------------
+   Responsive
+------------------------------ */
+
 @media (max-width: 800px) {
+  .section {
+    padding-block: 80px;
+  }
+
   .layout {
     grid-template-columns: 1fr;
 
-    gap: 60px;
+    gap: 55px;
+  }
+
+  .layout h2 {
+    font-size: clamp(36px,
+        10vw,
+        58px);
+  }
+
+  .form {
+    gap: 27px;
+  }
+
+  .form button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .success,
+  .error {
+    animation: none;
+  }
+
+  .form input,
+  .form textarea,
+  .form button {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
   }
 }
