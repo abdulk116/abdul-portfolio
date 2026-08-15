@@ -12,7 +12,7 @@ interface RelatedProjectsProps {
 export default function RelatedProjects({
   projects,
 }: RelatedProjectsProps) {
-  if (projects.length === 0) {
+  if (!projects.length) {
     return null;
   }
 
@@ -25,17 +25,18 @@ export default function RelatedProjects({
               Continue Exploring
             </span>
 
-            <h2>
-              More projects
-            </h2>
+            <h2>More projects</h2>
           </div>
 
-          <Link href="/projects">
-            View all projects
+          <Link
+            href="/projects"
+            className={styles.viewAll}
+          >
+            <span>View all projects</span>
 
             <ArrowUpRight
               size={16}
-              strokeWidth={1.8}
+              strokeWidth={1.7}
             />
           </Link>
         </div>
@@ -47,18 +48,14 @@ export default function RelatedProjects({
               href={`/projects/${project.slug}`}
               className={styles.card}
             >
-              <div>
+              <div className={styles.content}>
                 <span className={styles.category}>
                   {project.category}
                 </span>
 
-                <h3>
-                  {project.title}
-                </h3>
+                <h3>{project.title}</h3>
 
-                <p>
-                  {project.shortDescription}
-                </p>
+                <p>{project.shortDescription}</p>
               </div>
 
               <span className={styles.icon}>

@@ -1,3 +1,5 @@
+import { ArrowUpRight } from "lucide-react";
+
 import type { Project } from "@/types/project";
 
 import styles from "./ProjectFeatures.module.scss";
@@ -13,27 +15,52 @@ export default function ProjectFeatures({
     <section className={styles.section}>
       <div className="container">
         <div className={styles.grid}>
+          {/* Section Label */}
           <div className={styles.label}>
-            <span>02</span>
-            Features
+            <span className={styles.sectionNumber}>
+              02
+            </span>
+
+            <span>
+              Features
+            </span>
           </div>
 
+          {/* Features */}
           <div className={styles.features}>
             {project.features.map(
               (feature, index) => (
-                <div
+                <article
                   key={feature}
                   className={styles.feature}
+                  style={
+                    {
+                      "--feature-index": index,
+                    } as React.CSSProperties
+                  }
                 >
-                  <span>
-                    {String(index + 1).padStart(
-                      2,
-                      "0"
-                    )}
-                  </span>
+                  <div className={styles.top}>
+                    <span className={styles.number}>
+                      {String(index + 1).padStart(
+                        2,
+                        "0"
+                      )}
+                    </span>
 
-                  <p>{feature}</p>
-                </div>
+                    <span className={styles.icon}>
+                      <ArrowUpRight
+                        size={16}
+                        strokeWidth={1.6}
+                      />
+                    </span>
+                  </div>
+
+                  <p>
+                    {feature}
+                  </p>
+
+                  <span className={styles.line} />
+                </article>
               )
             )}
           </div>

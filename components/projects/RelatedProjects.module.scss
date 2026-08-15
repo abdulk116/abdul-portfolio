@@ -4,8 +4,13 @@
   background: var(--surface-muted);
 }
 
+/* ================================
+   Header
+================================ */
+
 .header {
   display: flex;
+
   align-items: flex-end;
   justify-content: space-between;
 
@@ -21,10 +26,10 @@
 
   color: var(--foreground-subtle);
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 }
@@ -32,18 +37,24 @@
 .header h2 {
   margin: 0;
 
-  font-size: clamp(34px,
-      5vw,
-      60px);
+  font-size: clamp(36px, 5vw, 60px);
+
+  font-weight: 500;
 
   line-height: 0.98;
 
   letter-spacing: -0.06em;
 }
 
-.header>a {
+/* ================================
+   View all
+================================ */
+
+.viewAll {
   display: inline-flex;
+
   align-items: center;
+
   gap: 7px;
 
   padding-bottom: 5px;
@@ -58,21 +69,39 @@
   transition:
     opacity var(--transition-fast),
     gap var(--transition-fast);
-
-  &:hover {
-    opacity: 0.6;
-    gap: 11px;
-  }
 }
+
+.viewAll:hover {
+  gap: 11px;
+
+  opacity: 0.6;
+}
+
+.viewAll svg {
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.viewAll:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* ================================
+   Grid
+================================ */
 
 .grid {
   display: grid;
 
   grid-template-columns:
-    repeat(2, 1fr);
+    repeat(2, minmax(0, 1fr));
 
   gap: 16px;
 }
+
+/* ================================
+   Project Card
+================================ */
 
 .card {
   position: relative;
@@ -80,26 +109,74 @@
   min-height: 280px;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: space-between;
 
   padding: 28px;
 
   border: 1px solid var(--border);
+
   border-radius: var(--radius-lg);
 
   background: var(--surface);
 
+  overflow: hidden;
+
   transition:
-    transform var(--transition-base),
-    border-color var(--transition-base);
+    border-color 300ms ease,
+    background 300ms ease,
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card:hover {
   transform: translateY(-5px);
 
-  border-color:
-    var(--border-strong);
+  border-color: var(--border-strong);
+
+  background: var(--surface);
+}
+
+/* ================================
+   Background Accent
+================================ */
+
+.card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  right: -105px;
+  bottom: -115px;
+
+  border-radius: 50%;
+
+  background: color-mix(in srgb,
+      var(--foreground) 4%,
+      transparent);
+
+  transform: scale(0.75);
+
+  transition:
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover::after {
+  transform: scale(1.35);
+}
+
+/* ================================
+   Content
+================================ */
+
+.content {
+  position: relative;
+
+  z-index: 1;
 }
 
 .category {
@@ -109,22 +186,40 @@
 
   color: var(--foreground-subtle);
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
+
+  transition:
+    color var(--transition-fast);
+}
+
+.card:hover .category {
+  color: var(--foreground);
 }
 
 .card h3 {
+  max-width: 90%;
+
   margin: 0;
 
-  font-size: 28px;
+  font-size: clamp(25px, 3vw, 32px);
+
+  font-weight: 500;
 
   line-height: 1;
 
   letter-spacing: -0.045em;
+
+  transition:
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover h3 {
+  transform: translateX(4px);
 }
 
 .card p {
@@ -139,23 +234,54 @@
   line-height: 1.65;
 }
 
+/* ================================
+   Arrow
+================================ */
+
 .icon {
+  position: relative;
+
+  z-index: 1;
+
   width: 38px;
   height: 38px;
 
   display: grid;
+
   place-items: center;
 
   border: 1px solid var(--border);
+
   border-radius: 50%;
 
   transition:
-    transform var(--transition-fast);
+    border-color var(--transition-fast),
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    background var(--transition-fast);
 }
 
 .card:hover .icon {
-  transform: rotate(45deg);
+  border-color: var(--border-strong);
+
+  transform: translate(3px, -3px) rotate(45deg);
+
+  background: var(--surface-muted);
 }
+
+/* ================================
+   Focus
+================================ */
+
+.card:focus-visible,
+.viewAll:focus-visible {
+  outline: 2px solid var(--foreground);
+
+  outline-offset: 4px;
+}
+
+/* ================================
+   Mobile
+================================ */
 
 @media (max-width: 768px) {
   .section {
@@ -166,9 +292,45 @@
     align-items: flex-start;
 
     flex-direction: column;
+
+    gap: 22px;
+
+    margin-bottom: 30px;
+  }
+
+  .header h2 {
+    font-size: clamp(36px, 12vw, 52px);
   }
 
   .grid {
     grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  .card {
+    min-height: 240px;
+
+    padding: 22px;
+  }
+
+  .card h3 {
+    font-size: 28px;
+  }
+}
+
+/* ================================
+   Reduced Motion
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card,
+  .card::after,
+  .card h3,
+  .icon,
+  .viewAll,
+  .viewAll svg {
+    transition: none;
   }
 }

@@ -31,19 +31,14 @@ export default function ProjectResponsibilities({
               {project.responsibilities.map(
                 (responsibility, index) => (
                   <div
-                    key={responsibility}
+                    key={`${project.id}-${index}`}
                     className={styles.item}
                   >
                     <span>
-                      {String(index + 1).padStart(
-                        2,
-                        "0"
-                      )}
+                      {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <p>
-                      {responsibility}
-                    </p>
+                    <p>{responsibility}</p>
                   </div>
                 )
               )}

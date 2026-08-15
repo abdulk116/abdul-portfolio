@@ -43,7 +43,10 @@ export default function ProjectsGrid({
       />
 
       {filteredProjects.length > 0 ? (
-        <div className={styles.grid}>
+        <div
+          key={filter}
+          className={styles.grid}
+        >
           {filteredProjects.map(
             (project, index) => (
               <ProjectCard

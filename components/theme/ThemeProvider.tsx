@@ -13,6 +13,7 @@ type Theme = "light" | "dark";
 interface ThemeContextValue {
   theme: Theme;
   toggleTheme: () => void;
+  mounted: boolean;
 }
 
 const ThemeContext =
@@ -26,35 +27,21 @@ export function ThemeProvider({
   const [theme, setTheme] =
     useState<Theme>("light");
 
+  const [mounted, setMounted] =
+    useState(false);
+
   useEffect(() => {
-    const storedTheme =
-      localStorage.getItem("theme") as Theme | null;
+    const currentTheme =
+      document.documentElement.dataset.theme;
 
-    if (
-      storedTheme === "light" ||
-      storedTheme === "dark"
-    ) {
-      setTheme(storedTheme);
+    const resolvedTheme =
+      currentTheme === "dark"
+        ? "dark"
+        : "light";
 
-      document.documentElement.dataset.theme =
-        storedTheme;
+    setTheme(resolvedTheme);
 
-      return;
-    }
-
-    const prefersDark =
-      window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-
-    const initialTheme = prefersDark
-      ? "dark"
-      : "light";
-
-    setTheme(initialTheme);
-
-    document.documentElement.dataset.theme =
-      initialTheme;
+    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
@@ -81,6 +68,7 @@ export function ThemeProvider({
       value={{
         theme,
         toggleTheme,
+        mounted,
       }}
     >
       {children}

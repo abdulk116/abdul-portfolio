@@ -20,7 +20,14 @@ export default function ProjectCard({
   index = 0,
 }: ProjectCardProps) {
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      style={
+        {
+          "--card-index": index,
+        } as React.CSSProperties
+      }
+    >
       <Link
         href={`/projects/${project.slug}`}
         className={styles.link}

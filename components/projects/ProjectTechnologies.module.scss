@@ -7,20 +7,29 @@
 .grid {
   display: grid;
 
-  grid-template-columns:
-    240px minmax(0, 1fr);
+  grid-template-columns: 200px minmax(0, 1fr);
 
-  gap: 70px;
+  gap: 80px;
+
+  align-items: start;
 }
 
+/* ================================
+   Label
+================================ */
+
 .label {
+  position: sticky;
+  top: 110px;
+
   display: flex;
   flex-direction: column;
-  gap: 12px;
+
+  gap: 10px;
 
   color: var(--foreground-subtle);
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 
   letter-spacing: 0.08em;
@@ -29,20 +38,84 @@
 }
 
 .label span {
-  font-size: 10px;
+  font-size: 9px;
+
+  letter-spacing: 0.12em;
 }
+
+/* ================================
+   Technologies
+================================ */
 
 .technologies {
   display: flex;
+
   flex-wrap: wrap;
 
   gap: 8px;
+
+  max-width: 760px;
 }
 
+/*
+  Give each technology slightly more
+  breathing room than the badges used
+  inside project cards.
+*/
+
+.technologies :global(.badge) {
+  padding: 8px 12px;
+
+  font-size: 11px;
+}
+
+/* ================================
+   Hover polish
+================================ */
+
+.technologies>* {
+  transition:
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.technologies>*:hover {
+  transform: translateY(-2px);
+}
+
+/* ================================
+   Tablet
+================================ */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 170px minmax(0, 1fr);
+
+    gap: 50px;
+  }
+}
+
+/* ================================
+   Mobile
+================================ */
+
 @media (max-width: 768px) {
+  .section {
+    padding-block: 65px;
+  }
+
   .grid {
     grid-template-columns: 1fr;
 
-    gap: 35px;
+    gap: 30px;
+  }
+
+  .label {
+    position: static;
+  }
+
+  .technologies {
+    gap: 7px;
   }
 }
