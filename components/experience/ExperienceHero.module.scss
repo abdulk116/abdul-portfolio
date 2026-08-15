@@ -1,0 +1,48 @@
+.hero {
+  padding-block: 110px 90px;
+}
+
+.eyebrow {
+  margin-bottom: 28px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 1000px;
+
+  margin: 0;
+
+  font-size: clamp(52px,
+      9vw,
+      112px);
+
+  line-height: 0.93;
+
+  letter-spacing: -0.075em;
+}
+
+.hero p {
+  max-width: 650px;
+
+  margin: 40px 0 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-block: 75px 65px;
+  }
+}

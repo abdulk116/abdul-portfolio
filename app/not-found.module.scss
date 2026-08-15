@@ -1,0 +1,63 @@
+.notFound {
+  min-height: 70vh;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.content {
+  max-width: 700px;
+}
+
+.code {
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.content h1 {
+  margin: 22px 0;
+
+  font-size: clamp(55px,
+      9vw,
+      110px);
+
+  line-height: 0.88;
+
+  letter-spacing: -0.075em;
+}
+
+.content p {
+  max-width: 450px;
+
+  margin-bottom: 35px;
+
+  color: var(--foreground-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.content a {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 44px;
+
+  padding: 0 20px;
+
+  border: 1px solid var(--foreground);
+
+  background: var(--foreground);
+
+  color: var(--background);
+
+  font-size: 11px;
+  font-weight: 700;
+}
