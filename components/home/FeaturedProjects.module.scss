@@ -220,7 +220,7 @@
   }
 
   .grid> :first-child {
-    grid-column: auto;
+    grid-column: auto !important; 
   }
 
   .grid> :first-child :global(.visual) {

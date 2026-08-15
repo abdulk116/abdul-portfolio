@@ -5,6 +5,7 @@ import FeaturedProjects from "@/components/home/FeaturedProjects";
 import CareerSnapshot from "@/components/home/CareerSnapshot";
 import EngineeringApproach from "@/components/home/EngineeringApproach";
 import ContactCTA from "@/components/home/ContactCTA";
+import ExperiencePreview from "@/components/home/ExperiencePreview";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,8 @@ export default function HomePage() {
       <Hero />
 
       <CareerSnapshot />
+
+      <ExperiencePreview />
 
       {/* <Stats /> */}
 

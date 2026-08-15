@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 
 import styles from "./Hero.module.scss";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -46,11 +47,10 @@ export default function Hero() {
 
           {/* Description */}
           <p className={styles.description}>
-            Frontend engineer specializing in
-            React.js, Next.js and TypeScript,
-            with hands-on experience building
-            business applications across
-            multiple projects and domains.
+            Frontend engineer specializing in React.js,
+            Next.js and TypeScript, with hands-on experience
+            building scalable, production-ready applications
+            across web, mobile, and multiple business domains.
           </p>
 
           {/* Actions */}
@@ -89,6 +89,10 @@ export default function Hero() {
               </Badge>
 
               <Badge>
+                JavaScript
+              </Badge>
+
+              <Badge>
                 TypeScript
               </Badge>
 
@@ -100,6 +104,20 @@ export default function Hero() {
                 Node.js
               </Badge>
             </div>
+
+            <Link
+              href="/skills"
+              className={styles.skillsLink}
+            >
+              <span>
+                View full technical stack
+              </span>
+
+              <ArrowUpRight
+                size={14}
+                strokeWidth={1.7}
+              />
+            </Link>
           </div>
         </div>
 
