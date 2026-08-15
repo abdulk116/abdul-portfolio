@@ -25,7 +25,7 @@ export function ThemeProvider({
   children: ReactNode;
 }) {
   const [theme, setTheme] =
-    useState<Theme>("light");
+    useState<Theme>("dark");
 
   const [mounted, setMounted] =
     useState(false);

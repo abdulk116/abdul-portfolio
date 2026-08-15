@@ -277,7 +277,6 @@
   text-transform: uppercase;
 }
 
-
 .stackItems {
   display: flex;
 
@@ -286,6 +285,41 @@
   gap: 7px;
 }
 
+.skillsLink {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 16px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
+
+  transition:
+    color var(--transition-fast),
+    gap var(--transition-fast);
+}
+
+.skillsLink svg {
+  transition:
+    transform var(--transition-fast);
+}
+
+.skillsLink:hover {
+  color: var(--foreground);
+
+  gap: 10px;
+}
+
+.skillsLink:hover svg {
+  transform: translate(2px, -2px);
+}
 
 /* =========================================
    Scroll indicator

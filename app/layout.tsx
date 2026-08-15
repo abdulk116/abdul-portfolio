@@ -94,7 +94,7 @@ const themeScript = `
       document.documentElement.dataset.theme =
         prefersDark ? "dark" : "light";
     } catch (error) {
-      document.documentElement.dataset.theme = "light";
+      document.documentElement.dataset.theme = "dark";
     }
   })();
 `;
