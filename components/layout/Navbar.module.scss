@@ -7,14 +7,59 @@
 
   width: 100%;
 
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid transparent;
 
   background: color-mix(in srgb,
-      var(--background) 92%,
+      var(--background) 88%,
       transparent);
 
   backdrop-filter: blur(14px);
+
+  -webkit-backdrop-filter: blur(14px);
+
+  transition:
+    transform 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1),
+    border-color var(--transition-base),
+    background var(--transition-base),
+    box-shadow var(--transition-base);
+
+  will-change: transform;
 }
+
+
+/* =========================================
+   Scroll state
+========================================= */
+
+.scrolled {
+  border-color: var(--border);
+
+  background: color-mix(in srgb,
+      var(--background) 94%,
+      transparent);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.035);
+}
+
+
+[data-theme="dark"] .scrolled {
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+.hidden {
+  transform: translateY(-100%);
+}
+
+
+/* =========================================
+   Navigation
+========================================= */
 
 .nav {
   min-height: 72px;
@@ -23,10 +68,13 @@
 
   align-items: center;
 
-  justify-content: space-between;
-
   gap: 30px;
 }
+
+
+/* =========================================
+   Logo
+========================================= */
 
 .logo {
   display: inline-flex;
@@ -37,6 +85,7 @@
 
   flex-shrink: 0;
 }
+
 
 .logoMark {
   width: 30px;
@@ -51,21 +100,46 @@
   border-radius: 50%;
 
   font-size: 9px;
+
   font-weight: 800;
 
   letter-spacing: -0.03em;
+
+  transition:
+    transform 300ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1),
+    background var(--transition-fast),
+    color var(--transition-fast);
 }
+
+
+.logo:hover .logoMark {
+  transform: rotate(-8deg);
+
+  background: var(--foreground);
+
+  color: var(--background);
+}
+
 
 .logoText {
   color: var(--foreground);
 
   font-size: 10px;
+
   font-weight: 700;
 
   letter-spacing: 0.08em;
 
   text-transform: uppercase;
 }
+
+
+/* =========================================
+   Desktop links
+========================================= */
 
 .desktopLinks {
   display: flex;
@@ -77,6 +151,7 @@
   margin-left: auto;
 }
 
+
 .link {
   position: relative;
 
@@ -85,11 +160,13 @@
   color: var(--foreground-muted);
 
   font-size: 11px;
+
   font-weight: 600;
 
   transition:
     color var(--transition-fast);
 }
+
 
 .link::after {
   content: "";
@@ -102,20 +179,27 @@
 
   height: 1px;
 
-  transform: scaleX(0);
+  transform:
+    scaleX(0);
 
   transform-origin: right;
 
-  background: var(--foreground);
+  background:
+    var(--foreground);
 
   transition:
-    transform var(--transition-fast);
+    transform 280ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1);
 }
+
 
 .link:hover,
 .link.active {
   color: var(--foreground);
 }
+
 
 .link.active::after,
 .link:hover::after {
@@ -124,6 +208,22 @@
   transform-origin: left;
 }
 
+
+/* =========================================
+   Right side
+========================================= */
+
+.right {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-left: 20px;
+}
+
+
 .desktopStatus {
   display: flex;
 
@@ -131,11 +231,10 @@
 
   gap: 7px;
 
-  margin-left: 20px;
-
   color: var(--foreground-subtle);
 
   font-size: 9px;
+
   font-weight: 600;
 
   letter-spacing: 0.06em;
@@ -143,22 +242,74 @@
   text-transform: uppercase;
 }
 
+
 .desktopStatus span {
   width: 6px;
   height: 6px;
 
   border-radius: 50%;
 
-  background: var(--foreground);
+  background: var(--success);
+
+  box-shadow:
+    0 0 0 0 color-mix(in srgb,
+      var(--success) 30%,
+      transparent);
+
+  animation:
+    pulse 2.2s ease-out infinite;
 }
 
-@media (max-width: 900px) {
 
-  .desktopLinks,
+@keyframes pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb,
+        var(--success) 30%,
+        transparent);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 6px color-mix(in srgb,
+        var(--success) 0%,
+        transparent);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb,
+        var(--success) 0%,
+        transparent);
+  }
+}
+
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 1100px) {
   .desktopStatus {
     display: none;
   }
+
+  .right {
+    margin-left: auto;
+  }
 }
+
+
+@media (max-width: 900px) {
+  .desktopLinks {
+    display: none;
+  }
+
+  .right {
+    gap: 8px;
+  }
+}
+
 
 @media (max-width: 480px) {
   .nav {
@@ -172,5 +323,19 @@
   .logoMark {
     width: 28px;
     height: 28px;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .header,
+  .logoMark,
+  .link::after {
+    transition: none;
+  }
+
+  .desktopStatus span {
+    animation: none;
   }
 }

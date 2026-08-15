@@ -83,7 +83,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body id="top">
         <ThemeProvider>
           <PersonJsonLd />
           <WebsiteJsonLd />

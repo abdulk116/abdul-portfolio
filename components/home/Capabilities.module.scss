@@ -2,66 +2,304 @@
   display: grid;
 
   grid-template-columns:
-    repeat(2, 1fr);
+    repeat(2, minmax(0, 1fr));
 
   gap: 1px;
 
   overflow: hidden;
 
   border: 1px solid var(--border);
+
   border-radius: var(--radius-lg);
 
   background: var(--border);
 }
 
+.grid>div {
+  min-width: 0;
+}
+
+
+/* --------------------------------------------------
+   Card
+-------------------------------------------------- */
+
 .card {
-  min-height: 300px;
+  height: 100%;
+
+  position: relative;
+
+  min-height: 320px;
 
   padding: 30px;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: space-between;
+
+  overflow: hidden;
 
   background: var(--surface);
 
   transition:
-    background var(--transition-base);
-
-  &:hover {
-    background: var(--surface-muted);
-  }
+    background var(--transition-base),
+    transform var(--transition-base);
 }
+
+
+/* subtle background layer */
+
+.card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 100% 0%,
+      var(--accent-soft),
+      transparent 45%);
+
+  opacity: 0;
+
+  transition:
+    opacity 350ms ease;
+
+  pointer-events: none;
+}
+
+
+.card:hover {
+  background: var(--surface-muted);
+
+  z-index: 1;
+}
+
+
+.card:hover::before {
+  opacity: 1;
+}
+
+
+/* --------------------------------------------------
+   Top
+-------------------------------------------------- */
 
 .top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
 
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+
+.number {
   color: var(--foreground-subtle);
 
-  font-size: 11px;
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  transition:
+    color var(--transition-fast);
 }
+
+
+.card:hover .number {
+  color: var(--foreground);
+}
+
+
+/* --------------------------------------------------
+   Icon
+-------------------------------------------------- */
+
+.icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+
+  color: var(--foreground-muted);
+
+  background: transparent;
+
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base),
+    background var(--transition-base),
+    transform 400ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1);
+}
+
+
+.card:hover .icon {
+  color: var(--foreground);
+
+  border-color: var(--border-strong);
+
+  background: var(--surface);
+
+  transform:
+    rotate(-8deg) scale(1.05);
+}
+
+
+/* --------------------------------------------------
+   Content
+-------------------------------------------------- */
+
+.content {
+  position: relative;
+
+  z-index: 1;
+}
+
 
 .card h3 {
   margin: 0;
 
-  font-size: 24px;
+  color: var(--foreground);
 
-  letter-spacing: -0.035em;
+  font-size: clamp(22px,
+      2.2vw,
+      28px);
+
+  font-weight: 650;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.04em;
 }
 
-.card p {
-  max-width: 420px;
 
-  margin: 12px 0 0;
+.card p {
+  max-width: 440px;
+
+  margin: 14px 0 0;
 
   color: var(--foreground-muted);
 
   font-size: 14px;
 
-  line-height: 1.7;
+  line-height: 1.75;
 }
+
+
+/* --------------------------------------------------
+   Bottom interaction
+-------------------------------------------------- */
+
+.bottom {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 30px;
+}
+
+
+.bottom>span:first-child {
+  width: 100%;
+
+  height: 1px;
+
+  background: var(--border);
+
+  transform-origin: left;
+
+  transition:
+    background var(--transition-base),
+    transform 400ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1);
+}
+
+
+.card:hover .bottom>span:first-child {
+  background: var(--foreground);
+
+  transform:
+    scaleX(0.92);
+}
+
+
+.arrow {
+  flex-shrink: 0;
+
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+
+  color: var(--foreground-subtle);
+
+  font-size: 13px;
+
+  opacity: 0;
+
+  transform:
+    translate(-8px, 8px);
+
+  transition:
+    opacity var(--transition-fast),
+    transform 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+
+.card:hover .arrow {
+  opacity: 1;
+
+  color: var(--foreground);
+
+  border-color: var(--border-strong);
+
+  transform:
+    translate(0, 0);
+}
+
+
+/* --------------------------------------------------
+   Tablet
+-------------------------------------------------- */
 
 @media (max-width: 768px) {
   .grid {
@@ -69,6 +307,69 @@
   }
 
   .card {
+    min-height: 280px;
+
+    padding: 25px;
+  }
+
+  /*
+   * Hover isn't available on touch devices,
+   * so keep the interaction affordance visible.
+   */
+
+  .arrow {
+    opacity: 1;
+
+    transform:
+      translate(0, 0);
+  }
+}
+
+
+/* --------------------------------------------------
+   Mobile
+-------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .card {
     min-height: 260px;
+
+    padding: 22px;
+  }
+
+  .icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .card h3 {
+    font-size: 23px;
+  }
+
+  .card p {
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+  .bottom {
+    margin-top: 25px;
+  }
+}
+
+
+/* --------------------------------------------------
+   Reduced motion
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card,
+  .card::before,
+  .icon,
+  .number,
+  .bottom>span:first-child,
+  .arrow {
+    transition: none;
   }
 }

@@ -25,22 +25,53 @@ export default function ProjectCard({
         className={styles.link}
       >
         <div className={styles.visual}>
-          <div className={styles.visualGrid} />
+          <div
+            className={styles.visualGrid}
+            aria-hidden="true"
+          />
 
-          <span className={styles.projectNumber}>
-            {String(index + 1).padStart(2, "0")}
-          </span>
+          <div
+            className={styles.visualGlow}
+            aria-hidden="true"
+          />
 
-          <span className={styles.openIcon}>
-            <ArrowUpRight
-              size={18}
-              strokeWidth={1.7}
-            />
-          </span>
+          <div className={styles.visualTop}>
+            <span className={styles.projectNumber}>
+              {String(index + 1).padStart(2, "0")}
+            </span>
 
-          <span className={styles.visualTitle}>
-            {project.title}
-          </span>
+            <span className={styles.projectType}>
+              Featured project
+            </span>
+
+            <span className={styles.openIcon}>
+              <ArrowUpRight
+                size={18}
+                strokeWidth={1.7}
+              />
+            </span>
+          </div>
+
+          <div className={styles.visualContent}>
+            <span className={styles.visualCategory}>
+              {project.category}
+            </span>
+
+            <span className={styles.visualTitle}>
+              {project.title}
+            </span>
+          </div>
+
+          <div
+            className={styles.visualFooter}
+            aria-hidden="true"
+          >
+            <span>View project</span>
+
+            <span className={styles.visualArrow}>
+              ↗
+            </span>
+          </div>
         </div>
 
         <div className={styles.content}>
@@ -50,10 +81,15 @@ export default function ProjectCard({
                 {project.category}
               </p>
 
-              <h3>
-                {project.title}
-              </h3>
+              <h3>{project.title}</h3>
             </div>
+
+            <span className={styles.contentArrow}>
+              <ArrowUpRight
+                size={17}
+                strokeWidth={1.7}
+              />
+            </span>
           </div>
 
           <p className={styles.description}>
