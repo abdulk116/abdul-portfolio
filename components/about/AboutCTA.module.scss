@@ -1,23 +1,66 @@
 .section {
-  padding-block: 120px;
+  position: relative;
+
+  padding-block: 140px;
+
+  overflow: hidden;
+
+  border-bottom: 1px solid var(--border);
+}
+
+/*
+  Subtle background glow.
+  It becomes almost invisible in light mode
+  and gives the dark theme some depth.
+*/
+.section::before {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 520px;
+  height: 520px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: var(--accent-soft);
+
+  opacity: 0.18;
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+/* Keep content above the background effect */
+.section .container {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
   display: block;
 
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 
   color: var(--foreground-subtle);
 
   font-size: 10px;
   font-weight: 700;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 }
 
 .section h2 {
+  max-width: 1000px;
+
   margin: 0;
 
   font-size: clamp(52px,
@@ -27,29 +70,166 @@
   line-height: 0.92;
 
   letter-spacing: -0.075em;
+
+  text-wrap: balance;
 }
 
+/* CTA */
+
 .link {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 
-  margin-top: 45px;
+  margin-top: 50px;
 
-  padding-bottom: 6px;
+  padding: 12px 0;
 
-  border-bottom: 1px solid var(--foreground);
+  color: var(--foreground);
 
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 650;
 
   transition:
-    opacity var(--transition-fast),
-    gap var(--transition-fast);
+    gap var(--transition-base),
+    color var(--transition-base),
+    opacity var(--transition-base);
+}
 
-  &:hover {
-    opacity: 0.6;
+/*
+  Animated underline
+*/
+.link::after {
+  content: "";
 
-    gap: 13px;
+  position: absolute;
+
+  right: 0;
+  bottom: 4px;
+  left: 0;
+
+  height: 1px;
+
+  background: var(--foreground);
+
+  transform: scaleX(1);
+  transform-origin: left;
+
+  transition:
+    transform var(--transition-base);
+}
+
+.link:hover {
+  gap: 17px;
+}
+
+.link:hover::after {
+  transform: scaleX(0);
+
+  transform-origin: right;
+}
+
+/*
+  Arrow container
+*/
+.icon {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: var(--surface);
+
+  transition:
+    transform var(--transition-base),
+    background var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.link:hover .icon {
+  transform: translateX(3px);
+
+  border-color: var(--border-strong);
+
+  background: var(--foreground);
+
+  color: var(--background);
+}
+
+/*
+  Keyboard accessibility
+*/
+.link:focus-visible {
+  outline: 2px solid var(--foreground);
+
+  outline-offset: 8px;
+
+  border-radius: 4px;
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: 100px;
+  }
+
+  .section h2 {
+    font-size: clamp(48px,
+        12vw,
+        78px);
+  }
+
+  .link {
+    margin-top: 40px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .section {
+    padding-block: 80px;
+  }
+
+  .eyebrow {
+    margin-bottom: 22px;
+  }
+
+  .section h2 {
+    font-size: clamp(44px,
+        14vw,
+        64px);
+
+    line-height: 0.94;
+  }
+
+  .link {
+    margin-top: 35px;
+
+    font-size: 13px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/*
+  Respect users who disable animation.
+*/
+@media (prefers-reduced-motion: reduce) {
+
+  .link,
+  .link::after,
+  .icon {
+    transition: none;
   }
 }

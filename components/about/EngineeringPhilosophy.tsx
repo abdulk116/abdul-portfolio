@@ -43,15 +43,23 @@ export default function EngineeringPhilosophy() {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.heading}>
-          <span>
-            01 — Philosophy
+          <span className={styles.eyebrow}>
+            02 — Philosophy
           </span>
 
-          <h2>
-            How I think about
-            <br />
-            frontend engineering.
-          </h2>
+          <div className={styles.headingContent}>
+            <h2>
+              How I think about
+              <br />
+              <span>frontend engineering.</span>
+            </h2>
+
+            <p>
+              A few principles that guide how I
+              design, structure and improve the
+              interfaces I build.
+            </p>
+          </div>
         </div>
 
         <div className={styles.grid}>
@@ -63,24 +71,28 @@ export default function EngineeringPhilosophy() {
                 key={principle.number}
                 className={styles.card}
               >
-                <div className={styles.top}>
-                  <span>
+                <div className={styles.cardTop}>
+                  <span className={styles.number}>
                     {principle.number}
                   </span>
 
-                  <Icon
-                    size={20}
-                    strokeWidth={1.5}
-                  />
+                  <div className={styles.icon}>
+                    <Icon
+                      size={20}
+                      strokeWidth={1.5}
+                    />
+                  </div>
                 </div>
 
-                <h3>
-                  {principle.title}
-                </h3>
+                <div className={styles.cardContent}>
+                  <h3>{principle.title}</h3>
 
-                <p>
-                  {principle.description}
-                </p>
+                  <p>{principle.description}</p>
+                </div>
+
+                <span className={styles.corner}>
+                  ↗
+                </span>
               </article>
             );
           })}

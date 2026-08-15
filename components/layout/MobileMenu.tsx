@@ -33,6 +33,9 @@ export default function MobileMenu() {
       return;
     }
 
+    const previousOverflow =
+      document.body.style.overflow;
+
     document.body.style.overflow = "hidden";
 
     const handleKeyDown = (
@@ -49,7 +52,8 @@ export default function MobileMenu() {
     );
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow =
+        previousOverflow;
 
       document.removeEventListener(
         "keydown",
@@ -133,11 +137,10 @@ export default function MobileMenu() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`${styles.mobileLink} ${
-                      active
-                        ? styles.active
-                        : ""
-                    }`}
+                    className={`${styles.mobileLink} ${active
+                      ? styles.active
+                      : ""
+                      }`}
                     aria-current={
                       active
                         ? "page"
