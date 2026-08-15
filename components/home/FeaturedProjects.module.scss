@@ -92,7 +92,7 @@
   min-height: 520px;
 }
 
-.grid>div:first-child :global(.project-card) {
+.grid> :first-child>a>.visual {
   min-height: 500px;
 }
 
@@ -225,6 +225,10 @@
 
   .grid> :first-child :global(.visual) {
     min-height: 300px;
+  }
+
+  .grid> :first-child>a>.visual {
+    min-height: 270px;
   }
 
   .footer {

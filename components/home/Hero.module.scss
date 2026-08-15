@@ -1,198 +1,131 @@
 .hero {
   position: relative;
 
-  min-height: calc(100vh - 76px);
+  min-height: calc(100vh - 72px);
 
   display: flex;
+
   align-items: center;
 
-  padding-block: 110px 70px;
+  overflow: hidden;
+
+  padding-block: 100px 70px;
 
   border-bottom: 1px solid var(--border);
-
-  overflow: hidden;
 
   isolation: isolate;
 }
 
 
-/* --------------------------------------------------
-   Background Glow
--------------------------------------------------- */
+/* =========================================
+   Background
+========================================= */
 
-.backgroundGlow {
+.backgroundGrid {
   position: absolute;
-
-  z-index: -2;
-
-  width: 620px;
-  height: 620px;
-
-  top: -260px;
-  right: -180px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(circle,
-      var(--accent-soft) 0%,
-      transparent 68%);
-
-  filter: blur(25px);
-
-  opacity: 0.7;
-
-  pointer-events: none;
-
-  animation: glowFloat 8s ease-in-out infinite;
-}
-
-
-@keyframes glowFloat {
-
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  50% {
-    transform: translate3d(-25px,
-        20px,
-        0);
-  }
-}
-
-
-/* --------------------------------------------------
-   Background Grid
--------------------------------------------------- */
-
-.grid {
-  position: absolute;
-
-  z-index: -3;
 
   inset: 0;
 
+  z-index: -2;
+
+  opacity: 0.38;
+
   background-image:
-    linear-gradient(to right,
-      color-mix(in srgb,
-        var(--border) 45%,
-        transparent) 1px,
+    linear-gradient(var(--border) 1px,
       transparent 1px),
-    linear-gradient(to bottom,
-      color-mix(in srgb,
-        var(--border) 45%,
-        transparent) 1px,
+    linear-gradient(90deg,
+      var(--border) 1px,
       transparent 1px);
 
-  background-size:
-    80px 80px;
+  background-size: 55px 55px;
 
   mask-image:
     linear-gradient(to bottom,
       black,
       transparent 85%);
 
-  opacity: 0.28;
+  pointer-events: none;
+}
+
+
+/* =========================================
+   Soft ambient glow
+========================================= */
+
+.glow {
+  position: absolute;
+
+  width: 550px;
+  height: 550px;
+
+  top: 50%;
+  right: -250px;
+
+  z-index: -1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(circle,
+      color-mix(in srgb,
+        var(--foreground) 5%,
+        transparent) 0%,
+      transparent 70%);
+
+  transform:
+    translateY(-50%);
 
   pointer-events: none;
 }
 
 
-/* --------------------------------------------------
+/* =========================================
    Content
--------------------------------------------------- */
+========================================= */
 
 .content {
-  position: relative;
-
-  max-width: 1000px;
-
-  animation: heroContentIn 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  max-width: 1050px;
 }
 
 
-@keyframes heroContentIn {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-
-/* --------------------------------------------------
+/* =========================================
    Eyebrow
--------------------------------------------------- */
+========================================= */
 
 .eyebrow {
   display: inline-flex;
 
   align-items: center;
 
-  gap: 9px;
+  gap: 10px;
 
   margin-bottom: 28px;
 
   color: var(--foreground-muted);
 
   font-size: 11px;
+
   font-weight: 700;
 
   letter-spacing: 0.11em;
 
-  line-height: 1;
-
   text-transform: uppercase;
 
-  animation: eyebrowIn 600ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-
-@keyframes eyebrowIn {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-
-/* --------------------------------------------------
-   Availability Indicator
--------------------------------------------------- */
-
-.status {
-  position: relative;
-
-  width: 8px;
-  height: 8px;
-
-  display: grid;
-  place-items: center;
+  animation:
+    heroFadeUp 700ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1) both;
 }
 
 
 .dot {
-  width: 6px;
-  height: 6px;
+  position: relative;
+
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
 
   border-radius: 50%;
 
@@ -200,156 +133,101 @@
 }
 
 
-.status::before {
+.dot::after {
   content: "";
 
   position: absolute;
 
-  inset: -3px;
+  inset: -4px;
 
   border: 1px solid color-mix(in srgb,
-      var(--success) 50%,
+      var(--success) 35%,
       transparent);
 
   border-radius: 50%;
 
-  animation: availabilityPulse 2.4s ease-out infinite;
+  animation:
+    availabilityPulse 2s ease-out infinite;
 }
 
 
-@keyframes availabilityPulse {
-  0% {
-    opacity: 0.8;
-
-    transform: scale(0.7);
-  }
-
-  70% {
-    opacity: 0;
-
-    transform: scale(1.8);
-  }
-
-  100% {
-    opacity: 0;
-
-    transform: scale(1.8);
-  }
-}
-
-
-/* --------------------------------------------------
-   Title
--------------------------------------------------- */
+/* =========================================
+   Heading
+========================================= */
 
 .title {
   max-width: 1000px;
 
   margin: 0;
 
-  color: var(--foreground);
+  font-size: clamp(50px,
+      7.2vw,
+      96px);
 
-  font-size: clamp(52px,
-      8vw,
-      108px);
+  line-height: 0.98;
 
-  font-weight: 700;
+  font-weight: 600;
 
-  line-height: 0.94;
-
-  letter-spacing: -0.07em;
+  letter-spacing: -0.065em;
 }
 
-
-.titleLine {
+.line {
   display: block;
 
+  overflow: visible;
+
   animation:
-    titleLineIn 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    heroLineReveal 900ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1) both;
 }
 
-
-.titleLine:nth-child(1) {
+.line:nth-child(1) {
   animation-delay: 120ms;
 }
 
-.titleLine:nth-child(2) {
-  animation-delay: 180ms;
+.line:nth-child(2) {
+  animation-delay: 200ms;
 }
 
-.titleLine:nth-child(3) {
-  animation-delay: 240ms;
+.line:nth-child(3) {
+  animation-delay: 280ms;
 }
 
-
-@keyframes titleLineIn {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(28px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-
-.mutedLine {
+.muted {
   color: var(--foreground-muted);
 }
 
 
-/* --------------------------------------------------
+/* =========================================
    Description
--------------------------------------------------- */
+========================================= */
 
 .description {
   max-width: 650px;
 
-  margin: 34px 0 0;
+  margin: 42px 0 0;
 
   color: var(--foreground-muted);
 
   font-size: clamp(16px,
-      2vw,
+      1.6vw,
       20px);
 
-  line-height: 1.7;
+  line-height: 1.75;
 
   animation:
-    fadeUp 700ms 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    heroFadeUp 800ms 420ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1) both;
 }
 
 
-/* --------------------------------------------------
-   Shared Fade Up
--------------------------------------------------- */
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(18px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-
-/* --------------------------------------------------
+/* =========================================
    Actions
--------------------------------------------------- */
+========================================= */
 
 .actions {
   display: flex;
@@ -358,22 +236,28 @@
 
   gap: 10px;
 
-  margin-top: 38px;
+  margin-top: 36px;
 
   animation:
-    fadeUp 700ms 430ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    heroFadeUp 800ms 520ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1) both;
 }
 
 
-/* --------------------------------------------------
+/* =========================================
    Stack
--------------------------------------------------- */
+========================================= */
 
 .stack {
   margin-top: 58px;
 
   animation:
-    fadeUp 700ms 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    heroFadeUp 800ms 620ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1) both;
 }
 
 
@@ -385,9 +269,10 @@
   color: var(--foreground-subtle);
 
   font-size: 10px;
-  font-weight: 700;
 
-  letter-spacing: 0.11em;
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
 
   text-transform: uppercase;
 }
@@ -402,145 +287,142 @@
 }
 
 
-/* --------------------------------------------------
-   Scroll Indicator
--------------------------------------------------- */
+/* =========================================
+   Scroll indicator
+========================================= */
 
 .scrollIndicator {
-  position: relative;
-
   display: flex;
 
   align-items: center;
 
-  gap: 9px;
+  gap: 8px;
 
-  margin-top: 82px;
+  margin-top: 75px;
 
   color: var(--foreground-subtle);
 
   font-size: 9px;
 
-  font-weight: 600;
-
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 
   text-transform: uppercase;
 
   animation:
-    fadeUp 700ms 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-
-.scrollIcon {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  animation: scrollArrow 2s ease-in-out infinite;
-}
-
-
-@keyframes scrollArrow {
-
-  0%,
-  100% {
-    transform:
-      translate(0, 0);
-  }
-
-  50% {
-    transform:
-      translate(3px, 3px);
-  }
+    heroFadeUp 800ms 760ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1) both;
 }
 
 
 .scrollLine {
-  width: 42px;
+  width: 26px;
+
   height: 1px;
 
-  margin-left: 2px;
-
   background: var(--border-strong);
-
-  transform-origin: left;
-
-  animation: scrollLine 2s ease-in-out infinite;
 }
 
 
-@keyframes scrollLine {
+/* =========================================
+   Keyframes
+========================================= */
 
-  0%,
-  100% {
-    transform: scaleX(0.5);
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
 
-    opacity: 0.4;
+    transform:
+      translateY(22px);
   }
 
-  50% {
-    transform: scaleX(1);
-
+  to {
     opacity: 1;
+
+    transform:
+      translateY(0);
   }
 }
 
 
-/* --------------------------------------------------
+@keyframes heroLineReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes availabilityPulse {
+  0% {
+    transform: scale(0.8);
+
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(1.5);
+
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.5);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
    Tablet
--------------------------------------------------- */
+========================================= */
 
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
 
-    padding-block: 82px 62px;
+    padding-block: 82px 60px;
   }
 
-  .backgroundGlow {
-    width: 400px;
-    height: 400px;
-
-    top: -180px;
-    right: -180px;
+  .backgroundGrid {
+    background-size: 40px 40px;
   }
 
-  .grid {
-    background-size:
-      55px 55px;
-
-    opacity: 0.2;
-  }
-
-  .eyebrow {
-    margin-bottom: 23px;
-
-    font-size: 10px;
+  .content {
+    max-width: 100%;
   }
 
   .title {
-    font-size: clamp(48px,
-        13vw,
-        76px);
+    font-size: clamp(46px,
+        12vw,
+        72px);
 
-    letter-spacing: -0.065em;
+    line-height: 0.98;
+
+    letter-spacing: -0.06em;
   }
 
   .description {
-    margin-top: 27px;
+    margin-top: 30px;
 
     font-size: 16px;
-  }
 
-  .actions {
-    margin-top: 30px;
+    line-height: 1.7;
   }
 
   .stack {
-    margin-top: 44px;
+    margin-top: 46px;
   }
 
   .scrollIndicator {
@@ -549,36 +431,17 @@
 }
 
 
-/* --------------------------------------------------
+/* =========================================
    Mobile
--------------------------------------------------- */
+========================================= */
 
 @media (max-width: 480px) {
   .hero {
-    padding-block: 70px 58px;
-  }
-
-  .backgroundGlow {
-    width: 300px;
-    height: 300px;
-
-    top: -120px;
-    right: -160px;
-
-    filter: blur(35px);
-  }
-
-  .grid {
-    background-size:
-      45px 45px;
-
-    opacity: 0.16;
+    padding-block: 68px 50px;
   }
 
   .eyebrow {
-    gap: 8px;
-
-    margin-bottom: 21px;
+    margin-bottom: 23px;
 
     font-size: 9px;
 
@@ -586,17 +449,17 @@
   }
 
   .title {
-    font-size: clamp(44px,
-        14vw,
+    font-size: clamp(43px,
+        13.5vw,
         62px);
 
-    line-height: 0.96;
+    line-height: 0.99;
 
-    letter-spacing: -0.065em;
+    letter-spacing: -0.055em;
   }
 
   .description {
-    margin-top: 24px;
+    margin-top: 27px;
 
     font-size: 15px;
 
@@ -604,77 +467,52 @@
   }
 
   .actions {
-    flex-direction: column;
+    margin-top: 30px;
 
-    align-items: stretch;
-
-    margin-top: 28px;
-  }
-
-  .actions>* {
-    width: 100%;
+    gap: 8px;
   }
 
   .stack {
-    margin-top: 38px;
-  }
-
-  .stackItems {
-    gap: 6px;
+    margin-top: 42px;
   }
 
   .scrollIndicator {
-    margin-top: 52px;
-
-    font-size: 8px;
+    margin-top: 50px;
   }
 
-  .scrollLine {
-    width: 30px;
-  }
-}
+  .glow {
+    width: 350px;
+    height: 350px;
 
-
-/* --------------------------------------------------
-   Small Mobile
--------------------------------------------------- */
-
-@media (max-width: 360px) {
-  .hero {
-    padding-block: 60px 52px;
-  }
-
-  .title {
-    font-size: 42px;
-  }
-
-  .description {
-    font-size: 14px;
-  }
-
-  .stackLabel {
-    font-size: 9px;
+    right: -220px;
   }
 }
 
 
-/* --------------------------------------------------
-   Reduced Motion
--------------------------------------------------- */
+/* =========================================
+   Reduced motion
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
-  .backgroundGlow,
-  .content,
   .eyebrow,
-  .titleLine,
+  .line,
   .description,
   .actions,
   .stack,
   .scrollIndicator,
-  .status::before,
-  .scrollIcon,
-  .scrollLine {
-    animation: none !important;
+  .dot::after {
+    animation: none;
+  }
+
+  .eyebrow,
+  .line,
+  .description,
+  .actions,
+  .stack,
+  .scrollIndicator {
+    opacity: 1;
+
+    transform: none;
   }
 }

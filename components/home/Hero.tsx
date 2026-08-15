@@ -8,73 +8,39 @@ import Badge from "@/components/ui/Badge";
 
 import styles from "./Hero.module.scss";
 
-const technologies = [
-  {
-    label: "React.js",
-    variant: "accent" as const,
-  },
-  {
-    label: "Next.js",
-    variant: undefined,
-  },
-  {
-    label: "TypeScript",
-    variant: undefined,
-  },
-  {
-    label: "Redux",
-    variant: undefined,
-  },
-  {
-    label: "Node.js",
-    variant: undefined,
-  },
-];
-
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      {/* Decorative background */}
-      <div
-        className={styles.backgroundGlow}
-        aria-hidden="true"
-      />
+      <div className={styles.backgroundGrid} />
 
-      <div
-        className={styles.grid}
-        aria-hidden="true"
-      />
+      <div className={styles.glow} />
 
       <div className="container">
         <div className={styles.content}>
           {/* Eyebrow */}
           <div className={styles.eyebrow}>
-            <span
-              className={styles.status}
-              aria-hidden="true"
-            >
-              <span className={styles.dot} />
-            </span>
+            <span className={styles.dot} />
 
             <span>
               React.js / Frontend Engineer
             </span>
           </div>
 
-          {/* Heading */}
+          {/* Main heading */}
           <h1 className={styles.title}>
-            <span className={styles.titleLine}>
+            <span className={styles.line}>
               Building scalable,
             </span>
 
-            <span
-              className={`${styles.titleLine} ${styles.mutedLine}`}
-            >
-              performant
+            <span className={styles.line}>
+              <span className={styles.muted}>
+                performant
+              </span>{" "}
+              digital
             </span>
 
-            <span className={styles.titleLine}>
-              digital experiences.
+            <span className={styles.line}>
+              experiences.
             </span>
           </h1>
 
@@ -107,40 +73,48 @@ export default function Hero() {
             </Button>
           </div>
 
-          {/* Technology stack */}
+          {/* Stack */}
           <div className={styles.stack}>
             <span className={styles.stackLabel}>
               Core stack
             </span>
 
             <div className={styles.stackItems}>
-              {technologies.map((technology) => (
-                <Badge
-                  key={technology.label}
-                  variant={technology.variant}
-                >
-                  {technology.label}
-                </Badge>
-              ))}
+              <Badge variant="accent">
+                React.js
+              </Badge>
+
+              <Badge>
+                Next.js
+              </Badge>
+
+              <Badge>
+                TypeScript
+              </Badge>
+
+              <Badge>
+                Redux
+              </Badge>
+
+              <Badge>
+                Node.js
+              </Badge>
             </div>
           </div>
         </div>
 
         {/* Scroll indicator */}
         <div className={styles.scrollIndicator}>
-          <div className={styles.scrollIcon}>
-            <ArrowDownRight
-              size={15}
-              strokeWidth={1.5}
-            />
-          </div>
+          <span className={styles.scrollLine} />
 
-          <span>Scroll to explore</span>
-
-          <span
-            className={styles.scrollLine}
-            aria-hidden="true"
+          <ArrowDownRight
+            size={15}
+            strokeWidth={1.5}
           />
+
+          <span>
+            Scroll to explore
+          </span>
         </div>
       </div>
     </section>

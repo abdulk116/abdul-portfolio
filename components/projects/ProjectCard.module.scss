@@ -12,29 +12,27 @@
   background: var(--surface);
 
   transition:
-    transform 400ms cubic-bezier(0.22,
+    transform 350ms cubic-bezier(0.22,
       1,
       0.36,
       1),
-    border-color var(--transition-base),
-    box-shadow 400ms cubic-bezier(0.22,
-      1,
-      0.36,
-      1);
+    border-color 250ms ease,
+    box-shadow 350ms ease;
 }
-
 
 .card:hover {
-  transform:
-    translateY(-7px);
+  transform: translateY(-7px);
 
-  border-color:
-    var(--border-strong);
+  border-color: var(--border-strong);
 
   box-shadow:
-    var(--shadow-md);
+    0 20px 50px rgba(0, 0, 0, 0.08);
 }
 
+[data-theme="dark"] .card:hover {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3);
+}
 
 .link {
   height: 100%;
@@ -45,26 +43,22 @@
 }
 
 
-/* ==================================================
-   VISUAL
-================================================== */
+/* =========================================
+   Visual
+========================================= */
 
 .visual {
   position: relative;
 
-  min-height: 330px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: space-between;
-
-  padding: 25px;
+  min-height: 340px;
 
   overflow: hidden;
 
-  isolation: isolate;
+  display: flex;
+
+  align-items: flex-end;
+
+  padding: 28px;
 
   background:
     linear-gradient(135deg,
@@ -73,18 +67,14 @@
 }
 
 
-/* ==================================================
-   Grid
-================================================== */
+/* Grid */
 
 .visualGrid {
   position: absolute;
 
-  inset: -1px;
+  inset: 0;
 
-  z-index: -2;
-
-  opacity: 0.5;
+  opacity: 0.42;
 
   background-image:
     linear-gradient(var(--border) 1px,
@@ -93,238 +83,82 @@
       var(--border) 1px,
       transparent 1px);
 
-  background-size:
-    36px 36px;
-
-  transform:
-    scale(1);
+  background-size: 38px 38px;
 
   transition:
     transform 700ms cubic-bezier(0.22,
       1,
       0.36,
       1),
-    opacity 500ms ease;
+    opacity 400ms ease;
 }
-
 
 .card:hover .visualGrid {
-  opacity: 0.7;
+  transform: scale(1.08);
 
-  transform:
-    scale(1.06);
+  opacity: 0.65;
 }
 
 
-/* ==================================================
-   Glow
-================================================== */
+/* Glow */
 
 .visualGlow {
   position: absolute;
 
-  width: 280px;
-  height: 280px;
+  width: 320px;
+  height: 320px;
 
-  top: -140px;
-  right: -80px;
-
-  z-index: -1;
+  right: -120px;
+  bottom: -160px;
 
   border-radius: 50%;
 
   background:
-    var(--accent-soft);
-
-  filter: blur(45px);
-
-  opacity: 0.7;
-
-  transition:
-    transform 700ms cubic-bezier(0.22,
-      1,
-      0.36,
-      1),
-    opacity 500ms ease;
-}
-
-
-.card:hover .visualGlow {
-  transform:
-    translate(-30px,
-      30px) scale(1.15);
-
-  opacity: 1;
-}
-
-
-/* ==================================================
-   Visual Top
-================================================== */
-
-.visualTop {
-  display: grid;
-
-  grid-template-columns:
-    1fr auto 1fr;
-
-  align-items: center;
-
-  gap: 15px;
-}
-
-
-.projectNumber {
-  color:
-    var(--foreground-subtle);
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.1em;
-}
-
-
-.projectType {
-  color:
-    var(--foreground-subtle);
-
-  font-size: 8px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.1em;
-
-  text-transform: uppercase;
-
-  text-align: center;
-}
-
-
-.openIcon {
-  width: 38px;
-  height: 38px;
-
-  display: grid;
-
-  place-items: center;
-
-  justify-self: end;
-
-  border: 1px solid var(--border);
-
-  border-radius: 50%;
-
-  background:
-    color-mix(in srgb,
-      var(--surface) 80%,
-      transparent);
-
-  color:
-    var(--foreground);
+    radial-gradient(circle,
+      color-mix(in srgb,
+        var(--foreground) 7%,
+        transparent),
+      transparent 70%);
 
   transition:
-    transform 400ms cubic-bezier(0.22,
-      1,
-      0.36,
-      1),
-    background var(--transition-fast),
-    border-color var(--transition-fast);
-}
-
-
-.card:hover .openIcon {
-  transform:
-    rotate(45deg) scale(1.05);
-
-  background:
-    var(--foreground);
-
-  border-color:
-    var(--foreground);
-
-  color:
-    var(--background);
-}
-
-
-/* ==================================================
-   Visual Content
-================================================== */
-
-.visualContent {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 10px;
-
-  margin-top: auto;
-
-  margin-bottom: auto;
-}
-
-
-.visualCategory {
-  color:
-    var(--foreground-muted);
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.1em;
-
-  text-transform: uppercase;
-}
-
-
-.visualTitle {
-  max-width: 850px;
-
-  color:
-    var(--foreground);
-
-  font-size: clamp(34px,
-      5vw,
-      68px);
-
-  font-weight: 650;
-
-  line-height: 0.95;
-
-  letter-spacing: -0.065em;
-
-  transform-origin: left center;
-
-  transition:
-    transform 500ms cubic-bezier(0.22,
+    transform 600ms cubic-bezier(0.22,
       1,
       0.36,
       1);
 }
 
-
-.card:hover .visualTitle {
-  transform:
-    translateX(5px);
+.card:hover .visualGlow {
+  transform: scale(1.35);
 }
 
 
-/* ==================================================
-   Visual Footer
-================================================== */
+/* Project number */
 
-.visualFooter {
-  display: flex;
+.projectNumber {
+  position: absolute;
 
-  align-items: center;
+  top: 23px;
+  left: 25px;
 
-  justify-content: space-between;
+  color: var(--foreground-subtle);
 
-  color:
-    var(--foreground-subtle);
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+
+/* Category */
+
+.projectType {
+  position: absolute;
+
+  top: 22px;
+  left: 65px;
+
+  color: var(--foreground-subtle);
 
   font-size: 9px;
 
@@ -336,9 +170,16 @@
 }
 
 
-.visualArrow {
-  width: 27px;
-  height: 27px;
+/* Arrow */
+
+.openIcon {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  width: 42px;
+  height: 42px;
 
   display: grid;
 
@@ -348,39 +189,99 @@
 
   border-radius: 50%;
 
-  font-size: 12px;
+  background:
+    color-mix(in srgb,
+      var(--surface) 88%,
+      transparent);
 
-  opacity: 0;
-
-  transform:
-    translate(-6px,
-      6px);
+  backdrop-filter: blur(8px);
 
   transition:
-    opacity var(--transition-fast),
     transform 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1),
+    background 250ms ease;
+}
+
+.card:hover .openIcon {
+  transform:
+    rotate(45deg) scale(1.05);
+
+  background: var(--foreground);
+
+  color: var(--background);
+}
+
+
+/* Visual content */
+
+.visualContent {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.visualLabel {
+  color: var(--foreground-subtle);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.visualTitle {
+  max-width: 80%;
+
+  font-size: clamp(30px,
+      4vw,
+      52px);
+
+  font-weight: 600;
+
+  line-height: 0.96;
+
+  letter-spacing: -0.055em;
+
+  transition:
+    transform 400ms cubic-bezier(0.22,
       1,
       0.36,
       1);
 }
 
-
-.card:hover .visualArrow {
-  opacity: 1;
-
+.card:hover .visualTitle {
   transform:
-    translate(0, 0);
+    translateX(4px);
 }
 
 
-/* ==================================================
+/* =========================================
    Content
-================================================== */
+========================================= */
 
 .content {
-  padding: 26px;
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  padding: 27px;
 }
 
+
+/* Header */
 
 .header {
   display: flex;
@@ -396,10 +297,9 @@
 .category {
   margin: 0 0 8px;
 
-  color:
-    var(--foreground-subtle);
+  color: var(--foreground-subtle);
 
-  font-size: 10px;
+  font-size: 9px;
 
   font-weight: 700;
 
@@ -412,72 +312,44 @@
 .content h3 {
   margin: 0;
 
-  color:
-    var(--foreground);
-
   font-size: 23px;
-
-  font-weight: 650;
 
   line-height: 1.1;
 
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
 }
 
 
-.contentArrow {
+/* Mobile arrow */
+
+.mobileArrow {
+  display: none;
+
   flex-shrink: 0;
 
   width: 32px;
   height: 32px;
 
-  display: grid;
+  align-items: center;
 
-  place-items: center;
+  justify-content: center;
 
   border: 1px solid var(--border);
 
   border-radius: 50%;
 
-  color:
-    var(--foreground-subtle);
-
-  opacity: 0;
-
-  transform:
-    translate(-5px,
-      5px);
-
-  transition:
-    opacity var(--transition-fast),
-    transform 350ms cubic-bezier(0.22,
-      1,
-      0.36,
-      1);
+  color: var(--foreground-muted);
 }
 
 
-.card:hover .contentArrow {
-  opacity: 1;
-
-  transform:
-    translate(0, 0);
-
-  color:
-    var(--foreground);
-
-  border-color:
-    var(--border-strong);
-}
-
+/* Description */
 
 .description {
-  max-width: 620px;
+  max-width: 580px;
 
-  margin: 16px 0 20px;
+  margin: 17px 0 22px;
 
-  color:
-    var(--foreground-muted);
+  color: var(--foreground-muted);
 
   font-size: 13px;
 
@@ -485,84 +357,129 @@
 }
 
 
+/* Technologies */
+
 .technologies {
   display: flex;
 
   flex-wrap: wrap;
 
   gap: 6px;
+
+  margin-top: auto;
 }
 
 
-/* ==================================================
+/* =========================================
+   View project
+========================================= */
+
+.viewProject {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  width: fit-content;
+
+  margin-top: 24px;
+
+  padding-bottom: 4px;
+
+  border-bottom: 1px solid var(--foreground);
+
+  color: var(--foreground);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+
+  transition:
+    gap 250ms ease,
+    opacity 250ms ease;
+}
+
+.card:hover .viewProject {
+  gap: 11px;
+}
+
+
+/* =========================================
+   Featured card
+========================================= */
+
+:global(.featured-project-card) {
+  min-height: 500px;
+}
+
+
+/* =========================================
    Tablet
-================================================== */
+========================================= */
 
 @media (max-width: 768px) {
   .visual {
-    min-height: 300px;
+    min-height: 270px;
 
-    padding: 22px;
-  }
-
-  .content {
-    padding: 22px;
+    padding: 23px;
   }
 
   .visualTitle {
-    font-size: clamp(34px,
-        10vw,
-        52px);
+    font-size: clamp(30px,
+        8vw,
+        45px);
   }
 
-  /*
-   * Keep useful interaction cues
-   * visible on touch devices.
-   */
+  .content {
+    padding: 23px;
+  }
 
-  .visualArrow,
-  .contentArrow {
-    opacity: 1;
-
-    transform:
-      translate(0, 0);
+  .card:hover {
+    transform: translateY(-4px);
   }
 }
 
 
-/* ==================================================
+/* =========================================
    Mobile
-================================================== */
+========================================= */
 
 @media (max-width: 480px) {
   .visual {
-    min-height: 270px;
+    min-height: 245px;
 
     padding: 20px;
   }
 
-  .visualTop {
-    grid-template-columns:
-      1fr auto;
+  .projectNumber {
+    top: 18px;
+    left: 20px;
   }
 
   .projectType {
-    display: none;
+    top: 18px;
+    left: 57px;
   }
 
   .openIcon {
-    width: 35px;
-    height: 35px;
+    top: 15px;
+    right: 15px;
+
+    width: 38px;
+    height: 38px;
   }
 
   .visualTitle {
-    font-size: clamp(32px,
-        11vw,
-        46px);
+    max-width: 88%;
+
+    font-size: 34px;
   }
 
   .content {
-    padding: 20px;
+    padding: 21px;
   }
 
   .content h3 {
@@ -570,24 +487,16 @@
   }
 
   .description {
-    font-size: 12px;
+    margin-top: 14px;
+
+    font-size: 13px;
   }
-}
 
+  .mobileArrow {
+    display: flex;
+  }
 
-/* ==================================================
-   Reduced Motion
-================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .card,
-  .visualGrid,
-  .visualGlow,
-  .openIcon,
-  .visualTitle,
-  .visualArrow,
-  .contentArrow {
-    transition: none;
+  .viewProject {
+    margin-top: 20px;
   }
 }
