@@ -1,5 +1,5 @@
 .section {
-  padding-block: 60px;
+  padding-block: 70px;
 
   border-bottom: 1px solid var(--border);
 }
@@ -7,74 +7,242 @@
 .grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   gap: 1px;
 
+  overflow: hidden;
+
   border: 1px solid var(--border);
+  border-radius: 2px;
 
   background: var(--border);
 }
 
 .card {
-  min-height: 230px;
+  position: relative;
 
-  padding: 26px;
+  min-height: 245px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 28px;
 
   background: var(--surface);
+
+  overflow: hidden;
+
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base);
 }
+
+/* Subtle hover background layer */
+.card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 100% 0%,
+      var(--accent-soft),
+      transparent 45%);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1);
+}
+
+.card:hover {
+  background: var(--surface-muted);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------
+   Icon
+--------------------------------------------- */
 
 .card svg {
-  margin-bottom: 45px;
+  position: relative;
+
+  z-index: 1;
+
+  margin-bottom: auto;
 
   color: var(--foreground-subtle);
+
+  transition:
+    color var(--transition-fast),
+    transform 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1);
 }
 
+.card:hover svg {
+  color: var(--foreground);
+
+  transform: translateY(-3px);
+}
+
+
+/* ---------------------------------------------
+   Value
+--------------------------------------------- */
+
 .card strong {
+  position: relative;
+
+  z-index: 1;
+
   display: block;
 
-  font-size: 38px;
+  font-size: clamp(32px, 4vw, 42px);
+
+  font-weight: 600;
 
   line-height: 1;
 
   letter-spacing: -0.06em;
+
+  transition:
+    transform 350ms cubic-bezier(0.22,
+      1,
+      0.36,
+      1);
 }
 
+.card:hover strong {
+  transform: translateX(3px);
+}
+
+
+/* ---------------------------------------------
+   Label
+--------------------------------------------- */
+
 .card>span {
+  position: relative;
+
+  z-index: 1;
+
   display: block;
 
-  margin-top: 7px;
+  margin-top: 8px;
 
   color: var(--foreground-subtle);
 
-  font-size: 10px;
+  font-size: 9px;
+
   font-weight: 700;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.11em;
 
   text-transform: uppercase;
 }
 
+
+/* ---------------------------------------------
+   Description
+--------------------------------------------- */
+
 .card p {
-  margin: 18px 0 0;
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 260px;
+
+  margin: 16px 0 0;
 
   color: var(--foreground-muted);
 
   font-size: 12px;
 
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
+
+/* ---------------------------------------------
+   Tablet
+--------------------------------------------- */
+
 @media (max-width: 900px) {
+  .section {
+    padding-block: 60px;
+  }
+
   .grid {
     grid-template-columns:
-      repeat(2, 1fr);
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .card {
+    min-height: 220px;
   }
 }
 
+
+/* ---------------------------------------------
+   Mobile
+--------------------------------------------- */
+
 @media (max-width: 600px) {
+  .section {
+    padding-block: 50px;
+  }
+
   .grid {
     grid-template-columns: 1fr;
+
+    border-radius: 2px;
+  }
+
+  .card {
+    min-height: 205px;
+
+    padding: 24px;
+  }
+
+  .card svg {
+    margin-bottom: 55px;
+  }
+
+  .card strong {
+    font-size: 34px;
+  }
+
+  .card p {
+    max-width: 100%;
+
+    margin-top: 14px;
+  }
+}
+
+
+/* ---------------------------------------------
+   Reduced Motion
+--------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card,
+  .card::before,
+  .card svg,
+  .card strong {
+    transition: none;
   }
 }
