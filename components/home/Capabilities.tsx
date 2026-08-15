@@ -9,6 +9,7 @@ import Section from "@/components/layout/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 import styles from "./Capabilities.module.scss";
+import Reveal from "../ui/Reveal";
 
 const capabilities = [
   {
@@ -51,35 +52,47 @@ export default function Capabilities() {
       />
 
       <div className={styles.grid}>
-        {capabilities.map((item) => {
+        {capabilities.map((item, index) => {
           const Icon = item.icon;
 
           return (
-            <article
+            <Reveal
               key={item.number}
-              className={styles.card}
+              delay={index * 100}
             >
-              <div className={styles.top}>
-                <span>
-                  {item.number}
-                </span>
+              <article
+                className={styles.card}
+              >
+                <div className={styles.top}>
+                  <span className={styles.number}>
+                    {item.number}
+                  </span>
 
-                <Icon
-                  size={22}
-                  strokeWidth={1.5}
-                />
-              </div>
+                  <div className={styles.icon}>
+                    <Icon
+                      size={21}
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                </div>
 
-              <div>
-                <h3>
-                  {item.title}
-                </h3>
+                <div className={styles.content}>
+                  <h3>{item.title}</h3>
 
-                <p>
-                  {item.description}
-                </p>
-              </div>
-            </article>
+                  <p>{item.description}</p>
+                </div>
+
+                <div
+                  className={styles.bottom}
+                  aria-hidden="true"
+                >
+                  <span />
+                  <span className={styles.arrow}>
+                    ↗
+                  </span>
+                </div>
+              </article>
+            </Reveal>
           );
         })}
       </div>

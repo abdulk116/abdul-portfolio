@@ -1,6 +1,15 @@
 .section {
+  position: relative;
+
   padding-block: 120px;
+
+  overflow: hidden;
 }
+
+
+/* --------------------------------------------------
+   Header
+-------------------------------------------------- */
 
 .header {
   display: grid;
@@ -14,6 +23,12 @@
 
   margin-bottom: 70px;
 }
+
+
+.headingGroup {
+  min-width: 0;
+}
+
 
 .eyebrow {
   display: block;
@@ -30,6 +45,7 @@
   text-transform: uppercase;
 }
 
+
 .header h2 {
   margin: 0;
 
@@ -37,12 +53,17 @@
       5vw,
       76px);
 
+  font-weight: 700;
+
   line-height: 0.94;
 
   letter-spacing: -0.065em;
 }
 
-.header>p {
+
+.intro {
+  max-width: 360px;
+
   margin: 0;
 
   color: var(--foreground-muted);
@@ -51,6 +72,11 @@
 
   line-height: 1.8;
 }
+
+
+/* --------------------------------------------------
+   Stats Grid
+-------------------------------------------------- */
 
 .grid {
   display: grid;
@@ -63,19 +89,88 @@
   border-left: 1px solid var(--border);
 }
 
+.grid>div {
+  min-width: 0;
+}
+
+/* --------------------------------------------------
+   Card
+-------------------------------------------------- */
+
 .card {
-  min-height: 290px;
+  height: 100%;
+
+  position: relative;
+
+  min-height: 300px;
 
   padding: 25px;
+
+  display: flex;
+
+  flex-direction: column;
 
   border-right: 1px solid var(--border);
 
   border-bottom: 1px solid var(--border);
 
+  background: transparent;
+
+  overflow: hidden;
+
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base);
+}
+
+
+.card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(135deg,
+      var(--surface-muted),
+      transparent 60%);
+
+  opacity: 0;
+
+  transition:
+    opacity var(--transition-base);
+
+  pointer-events: none;
+}
+
+
+.card:hover {
+  background: var(--surface);
+}
+
+
+.card:hover::before {
+  opacity: 0.7;
+}
+
+
+/* --------------------------------------------------
+   Card Top
+-------------------------------------------------- */
+
+.cardTop {
+  position: relative;
+
+  z-index: 1;
+
   display: flex;
 
-  flex-direction: column;
+  align-items: center;
+
+  justify-content: space-between;
 }
+
 
 .index {
   color: var(--foreground-subtle);
@@ -86,20 +181,89 @@
   letter-spacing: 0.1em;
 }
 
-.value {
+
+.cardArrow {
+  width: 25px;
+  height: 25px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+
+  color: var(--foreground-subtle);
+
+  font-size: 12px;
+
+  opacity: 0;
+
+  transform:
+    translate(-4px, 4px);
+
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+
+.card:hover .cardArrow {
+  opacity: 1;
+
+  color: var(--foreground);
+
+  border-color: var(--border-strong);
+
+  transform:
+    translate(0, 0);
+}
+
+
+/* --------------------------------------------------
+   Card Content
+-------------------------------------------------- */
+
+.cardContent {
+  position: relative;
+
+  z-index: 1;
+
   margin-top: auto;
+}
+
+
+.value {
+  display: block;
 
   font-size: clamp(46px,
       5vw,
       72px);
 
+  font-weight: 700;
+
   line-height: 0.9;
 
   letter-spacing: -0.07em;
+
+  transition:
+    transform var(--transition-base);
 }
+
+
+.card:hover .value {
+  transform:
+    translateX(4px);
+}
+
 
 .card h3 {
   margin: 25px 0 10px;
+
+  color: var(--foreground);
 
   font-size: 13px;
   font-weight: 700;
@@ -107,10 +271,11 @@
   letter-spacing: -0.01em;
 }
 
-.card p {
-  margin: 0;
 
+.card p {
   max-width: 250px;
+
+  margin: 0;
 
   color: var(--foreground-muted);
 
@@ -119,6 +284,81 @@
   line-height: 1.7;
 }
 
+
+/* --------------------------------------------------
+   Bottom Accent Line
+-------------------------------------------------- */
+
+.cardLine {
+  position: absolute;
+
+  right: 25px;
+  bottom: 0;
+  left: 25px;
+
+  height: 1px;
+
+  background: var(--foreground);
+
+  transform:
+    scaleX(0);
+
+  transform-origin: left;
+
+  transition:
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.card:hover .cardLine {
+  transform:
+    scaleX(1);
+}
+
+
+/* --------------------------------------------------
+   Footer Note
+-------------------------------------------------- */
+
+.footerNote {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-top: 18px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+.footerNote span:last-child {
+  text-align: right;
+}
+
+.card:nth-child(4) .value {
+  font-size: clamp(38px,
+      4vw,
+      58px);
+
+  letter-spacing: -0.055em;
+}
+
+
+/* --------------------------------------------------
+   Tablet
+-------------------------------------------------- */
+
 @media (max-width: 1000px) {
   .header {
     grid-template-columns: 1fr;
@@ -126,19 +366,50 @@
     gap: 30px;
   }
 
+  .intro {
+    max-width: 560px;
+  }
+
   .grid {
     grid-template-columns:
       repeat(2, 1fr);
   }
+
+  .card {
+    min-height: 270px;
+  }
 }
+
+
+/* --------------------------------------------------
+   Mobile
+-------------------------------------------------- */
 
 @media (max-width: 600px) {
   .section {
-    padding-block: 80px;
+    padding-block: 82px;
   }
 
   .header {
+    gap: 24px;
+
     margin-bottom: 45px;
+  }
+
+  .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .header h2 {
+    font-size: clamp(38px,
+        11vw,
+        52px);
+  }
+
+  .intro {
+    font-size: 13px;
+
+    line-height: 1.75;
   }
 
   .grid {
@@ -146,8 +417,54 @@
   }
 
   .card {
-    min-height: 230px;
+    min-height: 235px;
 
     padding: 20px;
+  }
+
+  /*
+   * Keep the arrow visible on touch
+   * devices because there is no hover.
+   */
+  .cardArrow {
+    opacity: 1;
+
+    transform:
+      translate(0, 0);
+  }
+
+  .cardLine {
+    right: 20px;
+    left: 20px;
+  }
+
+  .footerNote {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    line-height: 1.5;
+  }
+
+  .footerNote span:last-child {
+    text-align: left;
+  }
+}
+
+
+/* --------------------------------------------------
+   Reduced Motion
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card,
+  .card::before,
+  .cardArrow,
+  .value,
+  .cardLine {
+    transition: none;
   }
 }

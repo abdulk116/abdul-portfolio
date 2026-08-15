@@ -19,8 +19,7 @@ import { navigation } from "@/data/navigation";
 import styles from "./MobileMenu.module.scss";
 
 export default function MobileMenu() {
-  const [open, setOpen] =
-    useState(false);
+  const [open, setOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -29,78 +28,196 @@ export default function MobileMenu() {
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow =
-      open ? "hidden" : "";
+    if (!open) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (
+      event: KeyboardEvent
+    ) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
 
     return () => {
       document.body.style.overflow = "";
+
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
     };
   }, [open]);
 
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`)
+    );
+  };
+
   return (
     <>
+      {/* Menu Trigger */}
       <button
         type="button"
         className={styles.trigger}
         onClick={() => setOpen(true)}
         aria-label="Open navigation menu"
         aria-expanded={open}
+        aria-controls="mobile-navigation"
       >
-        <Menu size={19} />
+        <Menu
+          size={19}
+          strokeWidth={1.8}
+        />
       </button>
 
+      {/* Mobile Navigation */}
       {open && (
-        <div className={styles.overlay}>
+        <div
+          id="mobile-navigation"
+          className={styles.overlay}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+        >
+          {/* Top Bar */}
           <div className={styles.top}>
-            <span>
-              Navigation
-            </span>
+            <div className={styles.topTitle}>
+              <span className={styles.topDot} />
+
+              <span>
+                Navigation
+              </span>
+            </div>
 
             <button
               type="button"
-              onClick={() =>
-                setOpen(false)
-              }
+              className={styles.closeButton}
+              onClick={() => setOpen(false)}
               aria-label="Close navigation menu"
             >
-              <X size={20} />
+              <X
+                size={20}
+                strokeWidth={1.7}
+              />
             </button>
           </div>
 
-          <div className={styles.links}>
+          {/* Navigation Links */}
+          <nav
+            className={styles.links}
+            aria-label="Mobile navigation"
+          >
             {navigation.map(
-              (item, index) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={styles.mobileLink}
-                >
-                  <span>
-                    {String(index + 1).padStart(
-                      2,
-                      "0"
+              (item, index) => {
+                const active = isActive(
+                  item.href
+                );
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`${styles.mobileLink} ${
+                      active
+                        ? styles.active
+                        : ""
+                    }`}
+                    aria-current={
+                      active
+                        ? "page"
+                        : undefined
+                    }
+                    style={
+                      {
+                        "--item-index": index,
+                      } as React.CSSProperties
+                    }
+                  >
+                    <span
+                      className={
+                        styles.number
+                      }
+                    >
+                      {String(index + 1).padStart(
+                        2,
+                        "0"
+                      )}
+                    </span>
+
+                    <span
+                      className={
+                        styles.linkLabel
+                      }
+                    >
+                      {item.label}
+                    </span>
+
+                    <span
+                      className={
+                        styles.linkIcon
+                      }
+                    >
+                      <ArrowUpRight
+                        size={20}
+                        strokeWidth={1.5}
+                      />
+                    </span>
+
+                    {active && (
+                      <span
+                        className={
+                          styles.activeIndicator
+                        }
+                      />
                     )}
-                  </span>
-
-                  {item.label}
-
-                  <ArrowUpRight
-                    size={20}
-                    strokeWidth={1.5}
-                  />
-                </Link>
-              )
+                  </Link>
+                );
+              }
             )}
-          </div>
+          </nav>
 
+          {/* Bottom Information */}
           <div className={styles.bottom}>
-            <span>
-              Frontend Engineer
-            </span>
+            <div>
+              <span className={styles.bottomLabel}>
+                Role
+              </span>
 
-            <span>
-              Open to opportunities
-            </span>
+              <span>
+                Frontend Engineer
+              </span>
+            </div>
+
+            <div>
+              <span className={styles.bottomLabel}>
+                Availability
+              </span>
+
+              <span
+                className={
+                  styles.availability
+                }
+              >
+                <i />
+                Open to opportunities
+              </span>
+            </div>
           </div>
         </div>
       )}

@@ -7,14 +7,37 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--border);
+  padding: 0;
 
-  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: var(--surface);
 
   color: var(--foreground);
 
-  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
+
+.trigger:hover {
+  transform: translateY(-1px);
+
+  background: var(--surface-muted);
+
+  border-color: var(--border-strong);
+}
+
+.trigger:active {
+  transform: scale(0.94);
+}
+
+
+/* --------------------------------------------------
+   Overlay
+-------------------------------------------------- */
 
 .overlay {
   position: fixed;
@@ -24,127 +47,385 @@
   z-index: 200;
 
   display: flex;
-
   flex-direction: column;
 
-  padding: 25px;
+  padding: 20px;
 
-  background: var(--background);
+  background:
+    radial-gradient(circle at 90% 0%,
+      var(--accent-soft),
+      transparent 32%),
+    var(--background);
+
+  animation: menuIn 320ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  overflow-y: auto;
 }
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* --------------------------------------------------
+   Top
+-------------------------------------------------- */
 
 .top {
   display: flex;
 
   align-items: center;
-
   justify-content: space-between;
 
-  padding-bottom: 25px;
+  min-height: 48px;
+
+  padding-bottom: 18px;
 
   border-bottom: 1px solid var(--border);
 }
 
-.top span {
+.topTitle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
   color: var(--foreground-subtle);
 
   font-size: 9px;
   font-weight: 700;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 }
 
-.top button {
+.topDot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--foreground);
+}
+
+
+.closeButton {
   width: 38px;
   height: 38px;
 
   display: grid;
-
   place-items: center;
 
-  border: 1px solid var(--border);
+  padding: 0;
 
-  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: var(--surface);
 
   color: var(--foreground);
 
-  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
+
+.closeButton:hover {
+  transform: rotate(5deg);
+
+  background: var(--surface-muted);
+
+  border-color: var(--border-strong);
+}
+
+.closeButton:active {
+  transform: scale(0.94);
+}
+
+
+/* --------------------------------------------------
+   Links
+-------------------------------------------------- */
 
 .links {
   flex: 1;
 
   display: flex;
-
   flex-direction: column;
 
   justify-content: center;
+
+  padding-block: 35px;
 }
 
+
 .mobileLink {
+  position: relative;
+
   display: grid;
 
   grid-template-columns:
-    45px 1fr 25px;
+    38px 1fr 30px;
 
   align-items: center;
 
-  gap: 10px;
+  gap: 12px;
 
-  padding-block: 18px;
+  padding-block: 19px;
 
   border-bottom: 1px solid var(--border);
 
-  font-size: clamp(35px,
+  color: var(--foreground-muted);
+
+  font-size: clamp(36px,
       10vw,
-      60px);
+      62px);
 
-  line-height: 1;
+  font-weight: 600;
 
-  letter-spacing: -0.06em;
+  line-height: 0.95;
+
+  letter-spacing: -0.065em;
+
+  transition:
+    color var(--transition-fast),
+    padding-left var(--transition-base);
 }
 
-.mobileLink>span {
+.mobileLink:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.mobileLink:hover,
+.mobileLink.active {
+  color: var(--foreground);
+
+  padding-left: 7px;
+}
+
+
+/* --------------------------------------------------
+   Link Number
+-------------------------------------------------- */
+
+.number {
+  align-self: start;
+
+  padding-top: 5px;
+
   color: var(--foreground-subtle);
 
   font-size: 9px;
+
+  font-weight: 700;
 
   letter-spacing: 0;
 
-  font-weight: 700;
+  line-height: 1;
 }
 
-.mobileLink svg {
-  color: var(--foreground-subtle);
+
+/* --------------------------------------------------
+   Label
+-------------------------------------------------- */
+
+.linkLabel {
+  min-width: 0;
 }
 
-.bottom {
+
+/* --------------------------------------------------
+   Arrow
+-------------------------------------------------- */
+
+.linkIcon {
   display: flex;
 
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: var(--foreground-subtle);
+
+  transition:
+    transform var(--transition-base),
+    color var(--transition-fast);
+}
+
+.mobileLink:hover .linkIcon,
+.mobileLink.active .linkIcon {
+  color: var(--foreground);
+
+  transform: translate(3px, -3px);
+}
+
+
+/* --------------------------------------------------
+   Active Indicator
+-------------------------------------------------- */
+
+.activeIndicator {
+  position: absolute;
+
+  left: 0;
+  bottom: -1px;
+
+  width: 32px;
+  height: 2px;
+
+  background: var(--foreground);
+
+  animation: activeIndicatorIn 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes activeIndicatorIn {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 32px;
+  }
+}
+
+
+/* --------------------------------------------------
+   Bottom
+-------------------------------------------------- */
+
+.bottom {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
 
   gap: 20px;
 
-  padding-top: 20px;
+  padding-top: 18px;
 
-  color: var(--foreground-subtle);
+  color: var(--foreground-muted);
 
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 600;
 
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 
   text-transform: uppercase;
 }
 
-@media (max-width: 900px) {
+.bottom>div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.bottomLabel {
+  color: var(--foreground-subtle);
+
+  font-size: 8px;
+
+  letter-spacing: 0.12em;
+}
+
+.availability {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.availability i {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--foreground);
+}
+
+
+/* --------------------------------------------------
+   Mobile
+-------------------------------------------------- */
+
+@media (max-width: 480px) {
   .trigger {
-    display: flex;
+    width: 34px;
+    height: 34px;
+  }
+
+  .overlay {
+    padding: 16px;
+  }
+
+  .links {
+    padding-block: 25px;
+  }
+
+  .mobileLink {
+    grid-template-columns:
+      30px 1fr 26px;
+
+    gap: 8px;
+
+    padding-block: 17px;
+
+    font-size: clamp(34px,
+        11vw,
+        52px);
+  }
+
+  .number {
+    padding-top: 4px;
+  }
+
+  .bottom {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
   }
 }
 
+
+/* --------------------------------------------------
+   Reduced Motion
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .overlay,
+  .activeIndicator {
+    animation: none !important;
+  }
+
+  .trigger,
+  .closeButton,
+  .mobileLink,
+  .linkIcon {
+    transition: none !important;
+  }
+}
+
+
+/* --------------------------------------------------
+   Desktop
+-------------------------------------------------- */
+
 @media (min-width: 901px) {
+
+  .trigger,
   .overlay {
     display: none;
   }
