@@ -1,0 +1,36 @@
+.section {
+  padding-block: 80px;
+
+  border-top: 1px solid var(--border);
+}
+
+.content span {
+  color: var(--foreground-subtle);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.content h2 {
+  margin: 20px 0 0;
+
+  font-size: clamp(32px,
+      5vw,
+      58px);
+
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+}
+
+.content p {
+  margin: 20px 0 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 13px;
+}

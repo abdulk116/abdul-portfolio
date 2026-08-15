@@ -1,0 +1,52 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  margin-bottom: 28px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.filters button {
+  min-height: 38px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: var(--foreground-muted);
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+
+  &:hover {
+    color: var(--foreground);
+
+    border-color:
+      var(--border-strong);
+  }
+}
+
+.filters button.active {
+  color: var(--background);
+
+  background: var(--foreground);
+
+  border-color: var(--foreground);
+}

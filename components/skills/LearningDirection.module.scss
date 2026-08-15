@@ -1,0 +1,112 @@
+.section {
+  padding-block: 100px;
+}
+
+.card {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 70px 1fr 40px;
+
+  gap: 30px;
+
+  padding: 50px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+
+  color: var(--foreground-muted);
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 15px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.card h2 {
+  margin: 0;
+
+  font-size: clamp(34px,
+      5vw,
+      58px);
+
+  line-height: 0.98;
+
+  letter-spacing: -0.06em;
+}
+
+.card p {
+  max-width: 600px;
+
+  margin: 22px 0 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.areas {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 25px;
+}
+
+.areas span {
+  padding: 7px 11px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 999px;
+
+  color: var(--foreground-muted);
+
+  font-size: 10px;
+}
+
+.arrow {
+  color: var(--foreground-subtle);
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding-block: 70px;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+
+    padding: 28px;
+  }
+
+  .arrow {
+    display: none;
+  }
+}

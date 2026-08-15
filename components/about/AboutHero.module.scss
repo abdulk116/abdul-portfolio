@@ -1,0 +1,71 @@
+.hero {
+  padding-block: 110px 100px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 28px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 1050px;
+
+  margin: 0;
+
+  font-size: clamp(52px,
+      9vw,
+      112px);
+
+  line-height: 0.93;
+
+  letter-spacing: -0.075em;
+}
+
+.introduction {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 70px;
+
+  max-width: 900px;
+
+  margin-top: 60px;
+}
+
+.introduction p {
+  margin: 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding-block: 75px;
+  }
+
+  .introduction {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+
+    margin-top: 45px;
+  }
+}

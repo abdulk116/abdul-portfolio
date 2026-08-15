@@ -1,0 +1,174 @@
+.section {
+  padding-block: 110px;
+
+  background: var(--surface-muted);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+
+  font-size: clamp(34px,
+      5vw,
+      60px);
+
+  line-height: 0.98;
+
+  letter-spacing: -0.06em;
+}
+
+.header>a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding-bottom: 5px;
+
+  border-bottom: 1px solid var(--foreground);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+    opacity var(--transition-fast),
+    gap var(--transition-fast);
+
+  &:hover {
+    opacity: 0.6;
+    gap: 11px;
+  }
+}
+
+.grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+
+  min-height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 28px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  background: var(--surface);
+
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    var(--border-strong);
+}
+
+.category {
+  display: block;
+
+  margin-bottom: 16px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin: 0;
+
+  font-size: 28px;
+
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+}
+
+.card p {
+  max-width: 500px;
+
+  margin: 16px 0 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 13px;
+
+  line-height: 1.65;
+}
+
+.icon {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  transition:
+    transform var(--transition-fast);
+}
+
+.card:hover .icon {
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: 75px;
+  }
+
+  .header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

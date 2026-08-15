@@ -1,0 +1,169 @@
+.card {
+  height: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  background: var(--surface);
+
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+
+  &:hover {
+    transform: translateY(-6px);
+
+    border-color: var(--border-strong);
+
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.link {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.visual {
+  position: relative;
+
+  min-height: 330px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 26px;
+
+  background:
+    linear-gradient(135deg,
+      var(--surface-muted),
+      var(--background));
+}
+
+.visualGrid {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.45;
+
+  background-image:
+    linear-gradient(var(--border) 1px,
+      transparent 1px),
+    linear-gradient(90deg,
+      var(--border) 1px,
+      transparent 1px);
+
+  background-size: 36px 36px;
+}
+
+.projectNumber {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.openIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: var(--surface);
+
+  transition:
+    transform var(--transition-fast);
+}
+
+.card:hover .openIcon {
+  transform: rotate(45deg);
+}
+
+.visualTitle {
+  position: relative;
+
+  max-width: 80%;
+
+  font-size: clamp(28px,
+      4vw,
+      46px);
+
+  font-weight: 650;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.05em;
+}
+
+.content {
+  padding: 26px;
+}
+
+.category {
+  margin: 0 0 8px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.content h3 {
+  margin: 0;
+
+  font-size: 22px;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
+}
+
+.description {
+  margin: 16px 0 20px;
+
+  color: var(--foreground-muted);
+
+  font-size: 13px;
+
+  line-height: 1.65;
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+@media (max-width: 768px) {
+  .visual {
+    min-height: 260px;
+  }
+
+  .content {
+    padding: 22px;
+  }
+}

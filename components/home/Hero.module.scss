@@ -1,0 +1,164 @@
+.hero {
+  min-height: calc(100vh - 76px);
+
+  display: flex;
+  align-items: center;
+
+  padding-block: 100px 70px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.content {
+  max-width: 1000px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 26px;
+
+  color: var(--foreground-muted);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+}
+
+.title {
+  margin: 0;
+
+  max-width: 1000px;
+
+  font-size: clamp(52px,
+      8vw,
+      108px);
+
+  line-height: 0.96;
+
+  letter-spacing: -0.07em;
+
+  font-weight: 650;
+}
+
+.title span {
+  color: var(--foreground-muted);
+}
+
+.description {
+  max-width: 650px;
+
+  margin: 34px 0 0;
+
+  color: var(--foreground-muted);
+
+  font-size: clamp(16px,
+      2vw,
+      20px);
+
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 36px;
+}
+
+.stack {
+  margin-top: 58px;
+}
+
+.stackLabel {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stackItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.scrollIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 80px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+
+    padding-block: 78px 60px;
+  }
+
+  .title {
+    font-size: clamp(48px,
+        13vw,
+        76px);
+  }
+
+  .description {
+    margin-top: 28px;
+
+    font-size: 16px;
+  }
+
+  .stack {
+    margin-top: 44px;
+  }
+
+  .scrollIndicator {
+    margin-top: 58px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: clamp(48px,
+        14vw,
+        75px);
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: clamp(44px,
+        14vw,
+        62px);
+  }
+}

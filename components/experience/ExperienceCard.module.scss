@@ -1,0 +1,178 @@
+.card {
+  padding: 40px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  background: var(--surface);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  padding-bottom: 35px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.period {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+
+  font-size: clamp(30px,
+      5vw,
+      54px);
+
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+}
+
+.header h3 {
+  margin: 12px 0 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 15px;
+
+  font-weight: 500;
+}
+
+.projectCount {
+  min-width: 130px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  justify-content: flex-start;
+}
+
+.projectCount strong {
+  font-size: 24px;
+
+  letter-spacing: -0.04em;
+}
+
+.projectCount span {
+  margin-top: 5px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.body {
+  max-width: 900px;
+
+  padding-top: 35px;
+}
+
+.description {
+  margin: 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 16px;
+
+  line-height: 1.75;
+}
+
+.section {
+  margin-top: 45px;
+}
+
+.label {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.section ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.section li {
+  position: relative;
+
+  padding: 15px 0 15px 22px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--foreground-muted);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.section li::before {
+  content: "";
+
+  position: absolute;
+
+  top: 25px;
+  left: 3px;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--foreground);
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+@media (max-width: 700px) {
+  .card {
+    padding: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .projectCount {
+    align-items: flex-start;
+  }
+}

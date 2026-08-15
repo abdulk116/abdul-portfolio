@@ -1,0 +1,190 @@
+.section {
+  padding-block: 110px;
+
+  background: var(--surface-muted);
+}
+
+.layout {
+  display: grid;
+
+  grid-template-columns:
+    0.8fr 1.2fr;
+
+  gap: 100px;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 25px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.layout h2 {
+  margin: 0;
+
+  font-size: clamp(36px,
+      5vw,
+      62px);
+
+  line-height: 0.98;
+
+  letter-spacing: -0.06em;
+}
+
+.layout>div>p {
+  max-width: 450px;
+
+  margin-top: 25px;
+
+  color: var(--foreground-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 28px;
+}
+
+.form label {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+
+  padding: 15px 0;
+
+  border: 0;
+
+  border-bottom: 1px solid var(--border);
+
+  outline: none;
+
+  background: transparent;
+
+  color: var(--foreground);
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  letter-spacing: normal;
+
+  text-transform: none;
+
+  resize: vertical;
+
+  transition:
+    border-color var(--transition-fast);
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: var(--foreground-subtle);
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: var(--foreground);
+}
+
+.form button {
+  width: fit-content;
+
+  margin-top: 10px;
+
+  padding: 14px 22px;
+
+  border: 1px solid var(--foreground);
+
+  background: var(--foreground);
+
+  color: var(--background);
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+
+  transition:
+    opacity var(--transition-fast);
+}
+
+.form button:hover {
+  opacity: 0.75;
+}
+
+.form button:disabled {
+  cursor: wait;
+
+  opacity: 0.5;
+}
+
+.success,
+.error {
+  margin: 0;
+
+  font-size: 12px;
+}
+
+.success {
+  color: var(--foreground);
+}
+
+.error {
+  color: var(--foreground-muted);
+}
+
+.honeypot {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  overflow: hidden !important;
+
+  opacity: 0 !important;
+
+  pointer-events: none !important;
+}
+
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+  }
+}
