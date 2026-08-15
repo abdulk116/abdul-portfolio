@@ -284,6 +284,90 @@
   }
 }
 
+/* =========================================
+   Mobile Breadcrumb
+========================================= */
+
+.mobileBreadcrumb {
+  display: none;
+
+  align-items: center;
+
+  gap: 7px;
+
+  min-width: 0;
+
+  max-width: 130px;
+
+  color: var(--foreground-subtle);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.mobileBreadcrumb:hover {
+  color: var(--foreground);
+
+  transform: translateY(-1px);
+}
+
+.mobileBreadcrumbDot {
+  flex-shrink: 0;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow:
+    0 0 0 0 color-mix(in srgb,
+      var(--success) 25%,
+      transparent);
+
+  animation:
+    breadcrumbPulse 2.5s ease-out infinite;
+}
+
+@keyframes breadcrumbPulse {
+  0% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb,
+        var(--success) 25%,
+        transparent);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 5px color-mix(in srgb,
+        var(--success) 0%,
+        transparent);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb,
+        var(--success) 0%,
+        transparent);
+  }
+}
+
 
 /* =========================================
    Responsive
@@ -305,8 +389,12 @@
     display: none;
   }
 
+  .mobileBreadcrumb {
+    display: inline-flex;
+  }
+
   .right {
-    gap: 8px;
+    gap: 10px;
   }
 }
 
@@ -323,6 +411,21 @@
   .logoMark {
     width: 28px;
     height: 28px;
+  }
+
+  .mobileBreadcrumb {
+    max-width: 85px;
+
+    gap: 5px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.08em;
+  }
+
+  .mobileBreadcrumbDot {
+    width: 4px;
+    height: 4px;
   }
 }
 

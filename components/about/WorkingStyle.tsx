@@ -1,3 +1,5 @@
+import styles from "./WorkingStyle.module.scss";
+
 const workflow = [
   {
     number: "01",
@@ -31,44 +33,56 @@ const workflow = [
   },
 ];
 
-import styles from "./WorkingStyle.module.scss";
-
 export default function WorkingStyle() {
   return (
     <section className={styles.section}>
       <div className="container">
         <div className={styles.heading}>
-          <span>
-            02 — Workflow
+          <span className={styles.eyebrow}>
+            03 — Workflow
           </span>
 
-          <h2>
-            From requirement
-            <br />
-            to implementation.
-          </h2>
+          <div className={styles.headingContent}>
+            <h2>
+              From requirement
+              <br />
+              <span>to implementation.</span>
+            </h2>
+
+            <p>
+              I approach development as a process of
+              understanding, building, reviewing and
+              continuously improving the solution.
+            </p>
+          </div>
         </div>
 
         <div className={styles.workflow}>
-          {workflow.map((item) => (
-            <div
+          {workflow.map((item, index) => (
+            <article
               key={item.number}
               className={styles.item}
             >
-              <span className={styles.number}>
-                {item.number}
-              </span>
+              <div className={styles.marker}>
+                <span>{item.number}</span>
 
-              <div>
-                <h3>
-                  {item.title}
-                </h3>
-
-                <p>
-                  {item.description}
-                </p>
+                {index < workflow.length - 1 && (
+                  <span className={styles.connector} />
+                )}
               </div>
-            </div>
+
+              <div className={styles.content}>
+                <div className={styles.titleRow}>
+                  <h3>{item.title}</h3>
+
+                  <span className={styles.step}>
+                    Step {item.number}
+                  </span>
+                </div>
+
+                <p>{item.description}</p>
+              </div>
+            </article>
           ))}
         </div>
       </div>

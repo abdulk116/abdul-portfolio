@@ -24,6 +24,26 @@ export default function Navbar() {
   const [hidden, setHidden] =
     useState(false);
 
+  /*
+   * Find current navigation item.
+   *
+   * This allows the mobile navbar to show
+   * the current section while the full
+   * navigation is hidden.
+   */
+  const currentNavigation = navigation.find(
+    (item) => {
+      if (item.href === "/") {
+        return pathname === "/";
+      }
+
+      return (
+        pathname === item.href ||
+        pathname.startsWith(`${item.href}/`)
+      );
+    }
+  );
+
   useEffect(() => {
     let previousScrollY = window.scrollY;
 
@@ -81,6 +101,7 @@ export default function Navbar() {
           className={styles.nav}
           aria-label="Main navigation"
         >
+          {/* Logo */}
           <Link
             href="/"
             className={styles.logo}
@@ -95,6 +116,7 @@ export default function Navbar() {
             </span>
           </Link>
 
+          {/* Desktop Navigation */}
           <div className={styles.desktopLinks}>
             {navigation.map((item) => {
               const isActive =
@@ -127,7 +149,30 @@ export default function Navbar() {
             })}
           </div>
 
+          {/* Right Side */}
           <div className={styles.right}>
+
+            {/* Mobile Current Page */}
+            {currentNavigation &&
+              pathname !== "/" && (
+                <Link
+                  href={currentNavigation.href}
+                  className={styles.mobileBreadcrumb}
+                  aria-current="page"
+                >
+                  <span
+                    className={
+                      styles.mobileBreadcrumbDot
+                    }
+                  />
+
+                  <span>
+                    {currentNavigation.label}
+                  </span>
+                </Link>
+              )}
+
+            {/* Desktop Status */}
             <div
               className={styles.desktopStatus}
             >
