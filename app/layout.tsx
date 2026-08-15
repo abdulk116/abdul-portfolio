@@ -7,6 +7,7 @@ import PersonJsonLd from "@/components/seo/PersonJsonLd";
 import WebsiteJsonLd from "@/components/seo/WebsiteJsonLd";
 import { siteConfig } from "@/config/site";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -93,6 +94,7 @@ export default function RootLayout({
 
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
