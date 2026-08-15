@@ -6,6 +6,7 @@ import {
 } from "react";
 
 import styles from "./ContactForm.module.scss";
+import { Loader2 } from "lucide-react";
 
 type Status =
   | "idle"
@@ -167,13 +168,21 @@ export default function ContactForm() {
 
             <button
               type="submit"
-              disabled={
-                status === "sending"
-              }
+              disabled={status === "sending"}
             >
-              {status === "sending"
-                ? "Sending..."
-                : "Send message"}
+              {status === "sending" ? (
+                <>
+                  <Loader2
+                    size={14}
+                    strokeWidth={1.8}
+                    className={styles.spinner}
+                  />
+
+                  Sending...
+                </>
+              ) : (
+                "Send message"
+              )}
             </button>
 
             {status === "success" && (

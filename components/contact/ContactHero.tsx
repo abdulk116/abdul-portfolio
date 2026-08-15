@@ -4,22 +4,39 @@ export default function ContactHero() {
   return (
     <section className={styles.hero}>
       <div className="container">
-        <span className={styles.eyebrow}>
-          Contact
-        </span>
+        <div className={styles.top}>
+          <span className={styles.eyebrow}>
+            Contact
+          </span>
 
-        <h1>
-          Let&apos;s talk about
-          <br />
-          the next opportunity.
-        </h1>
+          <span className={styles.status}>
+            <i />
+            Open to opportunities
+          </span>
+        </div>
 
-        <p>
-          I&apos;m open to frontend engineering
-          opportunities where I can contribute
-          with React.js, Next.js and modern
-          frontend development.
-        </p>
+        <div className={styles.headingWrap}>
+          <span className={styles.line} />
+
+          <h1>
+            Let&apos;s talk about
+            <br />
+            <span>the next opportunity.</span>
+          </h1>
+        </div>
+
+        <div className={styles.bottom}>
+          <span className={styles.label}>
+            Get in touch
+          </span>
+
+          <p>
+            I&apos;m open to frontend engineering
+            opportunities where I can contribute
+            with React.js, Next.js and modern
+            frontend development.
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 .section {
-  padding-block: 100px;
+  padding-block: 105px;
 
   border-bottom: 1px solid var(--border);
 }
@@ -13,7 +13,7 @@
   gap: 100px;
 }
 
-.heading>span {
+.heading > span {
   color: var(--foreground-subtle);
 
   font-size: 10px;
@@ -27,9 +27,11 @@
 .heading h2 {
   margin: 25px 0 0;
 
-  font-size: clamp(36px,
-      5vw,
-      62px);
+  font-size: clamp(
+    36px,
+    5vw,
+    62px
+  );
 
   line-height: 0.98;
 
@@ -41,10 +43,11 @@
 }
 
 .link {
+  position: relative;
+
   display: flex;
 
   align-items: center;
-
   justify-content: space-between;
 
   gap: 30px;
@@ -53,12 +56,41 @@
 
   border-bottom: 1px solid var(--border);
 
+  color: var(--foreground);
+
   transition:
-    opacity var(--transition-fast);
+    padding-left var(--transition-base),
+    background-color var(--transition-fast);
+}
+
+.link::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -1px;
+
+  width: 0;
+  height: 1px;
+
+  background: var(--foreground);
+
+  transition:
+    width 350ms
+    cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .link:hover {
-  opacity: 0.55;
+  padding-left: 10px;
+}
+
+.link:hover::before {
+  width: 45px;
+}
+
+.link > div {
+  min-width: 0;
 }
 
 .link span {
@@ -77,9 +109,13 @@
 }
 
 .link strong {
+  display: block;
+
   font-size: 15px;
 
   font-weight: 500;
+
+  line-height: 1.4;
 
   word-break: break-word;
 }
@@ -88,12 +124,49 @@
   flex-shrink: 0;
 
   color: var(--foreground-subtle);
+
+  transition:
+    transform var(--transition-base),
+    color var(--transition-fast);
+}
+
+.link:hover svg {
+  color: var(--foreground);
+
+  transform: translate(
+    4px,
+    -4px
+  );
 }
 
 @media (max-width: 800px) {
+  .section {
+    padding-block: 75px;
+  }
+
   .layout {
     grid-template-columns: 1fr;
 
     gap: 50px;
+  }
+
+  .heading h2 {
+    margin-top: 20px;
+  }
+
+  .link {
+    padding-block: 22px;
+  }
+
+  .link:hover {
+    padding-left: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .link::before,
+  .link svg {
+    transition: none;
   }
 }

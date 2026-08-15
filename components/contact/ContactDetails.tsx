@@ -1,5 +1,4 @@
 import {
-  ArrowUpRight,
   Download,
   ExternalLink,
   Mail,
@@ -35,8 +34,9 @@ export default function ContactDetails() {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.layout}>
+          {/* Heading */}
           <div className={styles.heading}>
-            <span>
+            <span className={styles.eyebrow}>
               Get in touch
             </span>
 
@@ -45,8 +45,15 @@ export default function ContactDetails() {
               <br />
               to reach me.
             </h2>
+
+            <p>
+              Whether it&apos;s a frontend opportunity,
+              freelance project or collaboration,
+              feel free to reach out.
+            </p>
           </div>
 
+          {/* Contact links */}
           <div className={styles.links}>
             {links.map((link) => {
               const Icon = link.icon;
@@ -67,44 +74,49 @@ export default function ContactDetails() {
                   }
                   className={styles.link}
                 >
-                  <div>
-                    <span>
+                  <div className={styles.linkContent}>
+                    <span className={styles.label}>
                       {link.label}
                     </span>
 
-                    <strong>
+                    <strong className={styles.value}>
                       {link.value}
                     </strong>
                   </div>
 
-                  <Icon
-                    size={18}
-                    strokeWidth={1.5}
-                  />
+                  <span className={styles.icon}>
+                    <Icon
+                      size={18}
+                      strokeWidth={1.5}
+                    />
+                  </span>
                 </a>
               );
             })}
 
+            {/* Resume */}
             <a
               href={contact.resume}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.link}
             >
-              <div>
-                <span>
+              <div className={styles.linkContent}>
+                <span className={styles.label}>
                   Resume
                 </span>
 
-                <strong>
+                <strong className={styles.value}>
                   Download resume
                 </strong>
               </div>
 
-              <Download
-                size={18}
-                strokeWidth={1.5}
-              />
+              <span className={styles.icon}>
+                <Download
+                  size={18}
+                  strokeWidth={1.5}
+                />
+              </span>
             </a>
           </div>
         </div>
