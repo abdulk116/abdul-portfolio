@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
+  ExternalLink,
 } from "lucide-react";
 
 import Badge from "@/components/ui/Badge";
@@ -24,56 +25,39 @@ export default function ProjectCard({
         href={`/projects/${project.slug}`}
         className={styles.link}
       >
+        {/* Visual */}
         <div className={styles.visual}>
-          <div
-            className={styles.visualGrid}
-            aria-hidden="true"
-          />
+          <div className={styles.visualGrid} />
 
-          <div
-            className={styles.visualGlow}
-            aria-hidden="true"
-          />
+          <div className={styles.visualGlow} />
 
-          <div className={styles.visualTop}>
-            <span className={styles.projectNumber}>
-              {String(index + 1).padStart(2, "0")}
-            </span>
+          <span className={styles.projectNumber}>
+            {String(index + 1).padStart(2, "0")}
+          </span>
 
-            <span className={styles.projectType}>
-              Featured project
-            </span>
+          <span className={styles.projectType}>
+            {project.category}
+          </span>
 
-            <span className={styles.openIcon}>
-              <ArrowUpRight
-                size={18}
-                strokeWidth={1.7}
-              />
-            </span>
-          </div>
+          <span className={styles.openIcon}>
+            <ArrowUpRight
+              size={18}
+              strokeWidth={1.7}
+            />
+          </span>
 
           <div className={styles.visualContent}>
-            <span className={styles.visualCategory}>
-              {project.category}
+            <span className={styles.visualLabel}>
+              Featured project
             </span>
 
             <span className={styles.visualTitle}>
               {project.title}
             </span>
           </div>
-
-          <div
-            className={styles.visualFooter}
-            aria-hidden="true"
-          >
-            <span>View project</span>
-
-            <span className={styles.visualArrow}>
-              ↗
-            </span>
-          </div>
         </div>
 
+        {/* Content */}
         <div className={styles.content}>
           <div className={styles.header}>
             <div>
@@ -84,9 +68,9 @@ export default function ProjectCard({
               <h3>{project.title}</h3>
             </div>
 
-            <span className={styles.contentArrow}>
-              <ArrowUpRight
-                size={17}
+            <span className={styles.mobileArrow}>
+              <ExternalLink
+                size={15}
                 strokeWidth={1.7}
               />
             </span>
@@ -104,6 +88,17 @@ export default function ProjectCard({
                   {technology}
                 </Badge>
               ))}
+          </div>
+
+          <div className={styles.viewProject}>
+            <span>
+              View project
+            </span>
+
+            <ArrowUpRight
+              size={15}
+              strokeWidth={1.7}
+            />
           </div>
         </div>
       </Link>
