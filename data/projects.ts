@@ -2,6 +2,73 @@ import type { Project } from "@/types/project";
 
 export const projects: Project[] = [
   {
+    id: "lawft",
+
+    slug: "lawft",
+
+    title: "Lawft – Legal Practice Management Platform",
+
+    shortDescription:
+      "A production legal management platform where I focused on React performance, UI stabilization, responsive design and complex timezone handling.",
+
+    description:
+      "A production legal management platform where I was onboarded during my notice period as a Senior React Developer to resolve production UI issues, improve application performance, optimize state management and strengthen the frontend architecture. A major part of the work involved resolving a complex timezone issue affecting calendar events and user-selected timezones across the application.",
+
+    category: "professional",
+
+    role: "Frontend Developer",
+
+    technologies: [
+      "React.js",
+      "React Router",
+      "TypeScript",
+      "Redux Toolkit",
+      "FullCalendar",
+      "Chart.js",
+      "Axios",
+    ],
+
+    features: [
+      "Legal practice management workflows",
+      "Responsive application interface",
+      "Calendar and event management",
+      "User-configurable timezones",
+      "Data visualization and charts",
+      "Global state management",
+      "Route-level state management",
+      "Lazy-loaded components",
+      "Dark theme",
+      "Reusable UI components",
+    ],
+
+    responsibilities: [
+      "Resolved and stabilized multiple production UI issues across the application.",
+      "Improved responsive layouts and fixed cross-screen UI inconsistencies.",
+      "Worked as a Senior React Developer focusing on production stability and frontend performance.",
+      "Implemented lazy loading with React Suspense for heavy components to reduce the initial loading workload.",
+      "Refactored the frontend into reusable components and custom hooks to improve maintainability.",
+      "Reduced CSS complexity by removing unnecessary styles and introducing reusable CSS classes.",
+      "Implemented dark theme support across the application.",
+      "Optimized state management by keeping globally required data in Redux Toolkit and moving route-specific data into React Context.",
+      "Analyzed and resolved a complex timezone issue involving JavaScript Date objects, FullCalendar and user-configured timezones.",
+      "Created reusable date and timezone helper functions for consistent conversion between server UTC timestamps and user-selected timezones.",
+      "Investigated date and timezone handling approaches across libraries including Moment, Luxon and Day.js.",
+      "Ensured outgoing calendar and date values were normalized correctly before being submitted to the backend.",
+      "Used Axios for API communication and integrated frontend data with existing backend services.",
+    ],
+
+    challenge:
+      "The application allowed users to manually configure their preferred timezone independently from their device timezone. Calendar events were stored as UTC values on the server, but UI components relying on JavaScript Date objects could interpret timezone-adjusted values using the machine's system timezone. This caused calendar events to display incorrect times when a user's selected timezone differed from their system timezone.",
+
+    solution:
+      "Analyzed the complete date and timezone flow from the server response through the frontend state layer and calendar components. Implemented centralized timezone helper functions that first converted server UTC timestamps into the user's selected timezone, normalized the date and time representation before passing values to UI components, and converted user-entered values back to the appropriate timezone and UTC format before sending them to the server. This allowed the application to consistently respect the user's configured timezone regardless of the device's system timezone.",
+
+    outcome:
+      "Stabilized production UI issues, improved responsive behavior and frontend performance, reduced unnecessary global state usage, improved code maintainability through reusable components and hooks, and successfully resolved a complex timezone and calendar issue. The improvements were appreciated by the client for significantly improving production stability and resolving long-standing timezone inconsistencies.",
+
+    featured: true,
+  },
+  {
     id: "esense-smart-school",
 
     slug: "esense-smart-school",
@@ -57,7 +124,6 @@ export const projects: Project[] = [
 
     featured: true,
   },
-
   {
     id: "inventory-management",
     slug: "inventory-management",
@@ -108,7 +174,6 @@ export const projects: Project[] = [
 
     featured: true,
   },
-
   {
     id: "seller-portal",
     slug: "seller-portal",
