@@ -65,7 +65,7 @@ export default function Hero() {
             </Button>
 
             <Button
-              href="/resume/Abdul-Kareem-Resume.pdf"
+              href="/resume/Abdul_Kareem_Frontend_Engineer_Resume.pdf"
               external
               variant="secondary"
             >
