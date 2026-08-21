@@ -323,7 +323,7 @@ The portfolio provides a downloadable resume from the Hero section.
 Expected asset:
 
 ``` text
-public/resume/Abdul-Kareem-Resume.pdf
+public/resume/Abdul_Kareem_Frontend_Engineer_Resume.pdf
 ```
 
 ## 📬 Contact

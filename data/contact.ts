@@ -8,5 +8,5 @@ export const contact = {
     "https://github.com/abdulk116",
 
   resume:
-    "/resume.pdf",
+    "/resume/Abdul_Kareem_Frontend_Engineer_Resume.pdf",
 };
